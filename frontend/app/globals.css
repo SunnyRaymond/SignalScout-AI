@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #17202a;
+  --muted: #64748b;
+  --line: #d8e0e7;
+  --panel: #ffffff;
+  --canvas: #f6f8fb;
+  --signal: #0f9f8f;
+  --signal-dark: #0a6f68;
+  --amber: #f4a62a;
+  --rose: #e45c64;
+  --navy: #1f3a5f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  background:
+    linear-gradient(135deg, rgba(15, 159, 143, 0.10), transparent 35%),
+    linear-gradient(215deg, rgba(244, 166, 42, 0.14), transparent 30%),
+    var(--canvas);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.score-ring {
+  background: conic-gradient(var(--signal) calc(var(--score) * 1%), #e7eef4 0);
+}

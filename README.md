@@ -136,20 +136,3 @@ Relevance comes from title and description keyword matches plus domain role boos
 3. Restart the backend.
 4. Use `Slack Preview` first, then `Send Digest`.
 
-## Hackathon Submission
-
-Project Name: SignalScout AI
-
-Tagline: An AI agent that turns job postings into B2B buying signals and Slack-ready outreach.
-
-Track: Agent, Application
-
-Tech Stack: Next.js, React, TypeScript, Tailwind CSS, FastAPI, Python, SQLite, SQLAlchemy, Pydantic, OpenAI-compatible LLM, Adzuna API, The Muse API, Slack Webhook
-
-Demo URL: https://sunnyraymond.github.io/SignalScout-AI/
-
-Repo URL: https://github.com/SunnyRaymond/SignalScout-AI
-
-Screenshots: [dashboard](docs/screenshots/dashboard.png), [lead detail](docs/screenshots/lead-detail.png), [Slack preview](docs/screenshots/slack-preview.png)
-
-Logo: square radar/signal plus briefcase/scout motif in `frontend/public/logo.svg`

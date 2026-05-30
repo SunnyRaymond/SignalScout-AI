@@ -78,6 +78,12 @@ NEXT_PUBLIC_API_BASE_URL=http://localhost:8000
 
 `SLACK_WEBHOOK_URL` enables real Slack send. Without it, preview and send stay in demo mode.
 
+## Hosted Demo
+
+Live demo URL: https://sunnyraymond.github.io/SignalScout-AI/
+
+The GitHub Pages deployment runs a browser-only demo mode backed by `localStorage` and `frontend/public/sample_jobs.csv`, so judges can load sample jobs, run the agent, inspect leads, and preview Slack output without API keys or a hosted database. The FastAPI backend remains available for local or full-stack hosting.
+
 ## Demo Flow
 
 1. Start backend and frontend.
@@ -140,7 +146,7 @@ Track: Agent, Application
 
 Tech Stack: Next.js, React, TypeScript, Tailwind CSS, FastAPI, Python, SQLite, SQLAlchemy, Pydantic, OpenAI-compatible LLM, Adzuna API, The Muse API, Slack Webhook
 
-Demo URL: TBD
+Demo URL: https://sunnyraymond.github.io/SignalScout-AI/
 
 Repo URL: https://github.com/SunnyRaymond/SignalScout-AI
 

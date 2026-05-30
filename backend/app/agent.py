@@ -253,7 +253,7 @@ def build_slack_digest(leads: list[LeadSignal]) -> dict[str, Any]:
     else:
         lines = ["SignalScout AI buying-signal digest", ""]
         for index, lead in enumerate(top, 1):
-            lines.append(f"{index}. {lead.company} — {lead.score}/100")
+            lines.append(f"{index}. {lead.company} - {lead.score}/100")
             lines.append(f"   {lead.signal_summary}")
             lines.append(f"   Pain: {lead.inferred_pain}")
         text = "\n".join(lines)

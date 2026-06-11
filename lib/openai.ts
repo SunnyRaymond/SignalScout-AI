@@ -35,6 +35,22 @@ export async function enrichLeadsWithOpenAI(leads: OpenAILeadRequest[]) {
   if (!apiKey) {
     throw new HttpError(500, "OPENAI_API_KEY is not configured. Agent output requires live OpenAI generation.");
   }
+  const patches = new Map<string, OpenAILeadPatch>();
+  for (const chunk of chunked(leads, 5)) {
+    for (const patch of await requestLeadPatches(chunk, apiKey)) {
+      patches.set(patch.lead_key, patch);
+    }
+  }
+  const missing = leads.filter((lead) => !patches.has(lead.lead_key));
+  for (const lead of missing) {
+    for (const patch of await requestLeadPatches([lead], apiKey)) {
+      patches.set(patch.lead_key, patch);
+    }
+  }
+  return patches;
+}
+
+async function requestLeadPatches(leads: OpenAILeadRequest[], apiKey: string) {
   const baseUrl = (process.env.OPENAI_BASE_URL || "https://api.openai.com/v1").replace(/\/$/, "");
   const model = process.env.OPENAI_MODEL || defaultOpenAIModel;
   const response = await fetch(`${baseUrl}/chat/completions`, {
@@ -51,7 +67,8 @@ export async function enrichLeadsWithOpenAI(leads: OpenAILeadRequest[]) {
           content: [
             "You are SignalScout AI, a concise B2B sales intelligence agent.",
             "Turn hiring evidence into buying signals without inventing facts.",
-            "Return compact JSON only with shape {\"leads\":[{\"lead_key\":\"...\",\"signal_summary\":\"...\",\"inferred_pain\":\"...\",\"outreach_subject\":\"...\",\"outreach_body\":\"...\"}]}."
+            "Return compact JSON only with shape {\"leads\":[{\"lead_key\":\"...\",\"signal_summary\":\"...\",\"inferred_pain\":\"...\",\"outreach_subject\":\"...\",\"outreach_body\":\"...\"}]}.",
+            "Return exactly one object for every input lead_key, preserving each lead_key byte-for-byte."
           ].join(" ")
         },
         {
@@ -86,7 +103,7 @@ export async function enrichLeadsWithOpenAI(leads: OpenAILeadRequest[]) {
   if (!Array.isArray(output.leads)) {
     throw new HttpError(502, "OpenAI JSON did not include a leads array.");
   }
-  return new Map(output.leads.filter(isPatch).map((patch) => [patch.lead_key, patch]));
+  return output.leads.filter(isPatch);
 }
 
 function isPatch(value: unknown): value is OpenAILeadPatch {
@@ -101,4 +118,12 @@ async function safeResponseText(response: Response) {
   } catch {
     return `${response.status} ${response.statusText}`;
   }
+}
+
+function chunked<T>(items: T[], size: number) {
+  const chunks: T[][] = [];
+  for (let index = 0; index < items.length; index += size) {
+    chunks.push(items.slice(index, index + size));
+  }
+  return chunks;
 }

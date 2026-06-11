@@ -6,7 +6,7 @@ import type { JobPosting, JobPostingInput, LeadSignal, LeadSignalInput, OfferPro
 let cached: SupabaseClient | null = null;
 
 export function getSupabase() {
-  const url = process.env.SUPABASE_URL;
+  const url = normalizeSupabaseUrl(process.env.SUPABASE_URL);
   const key = process.env.SUPABASE_KEY;
   if (!url || !key) {
     throw new HttpError(500, "Supabase is not configured. Set SUPABASE_URL and SUPABASE_KEY.");
@@ -21,6 +21,21 @@ export function getSupabase() {
     });
   }
   return cached;
+}
+
+function normalizeSupabaseUrl(value: string | undefined) {
+  if (!value) {
+    return value;
+  }
+  try {
+    const url = new URL(value.trim());
+    url.pathname = url.pathname.replace(/\/rest\/v1\/?$/i, "");
+    url.search = "";
+    url.hash = "";
+    return url.toString().replace(/\/$/, "");
+  } catch {
+    return value;
+  }
 }
 
 async function timeoutFetch(input: RequestInfo | URL, init?: RequestInit) {

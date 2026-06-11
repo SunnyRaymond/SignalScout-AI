@@ -68,7 +68,7 @@ ADZUNA_APP_KEY=
 SLACK_WEBHOOK_URL=
 ```
 
-`OPENAI_MODEL` defaults to `gpt-5.4-nano`, the current low-cost nano model choice for this MVP. `SUPABASE_KEY` is used only in server route handlers; use a server-side Supabase secret/service-role-compatible key, not a browser-exposed public key.
+`OPENAI_MODEL` defaults to `gpt-5.4-nano`, the current low-cost nano model choice for this MVP. `SUPABASE_URL` should be the project URL, such as `https://your-project.supabase.co`; if you paste the REST URL ending in `/rest/v1`, the app normalizes it. `SUPABASE_KEY` is used only in server route handlers; use a server-side Supabase secret/service-role-compatible key, not a browser-exposed public key.
 
 ## Vercel Deploy
 

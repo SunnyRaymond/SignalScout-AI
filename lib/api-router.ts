@@ -1,7 +1,7 @@
 import type { NextRequest } from "next/server";
-import { buildLeadSignals, promptVersion } from "@/lib/agent";
+import { buildLeadSignals, previewLeadRanking, promptVersion } from "@/lib/agent";
 import { fetchProviderJobs } from "@/lib/job-providers";
-import { HttpError, fail, ok, readJson } from "@/lib/http";
+import { HttpError, csv, fail, ok, readJson } from "@/lib/http";
 import { readSampleJobs } from "@/lib/sample-jobs";
 import { buildSlackDigest, sendSlackDigest } from "@/lib/slack";
 import {
@@ -14,7 +14,20 @@ import {
   offerPayload,
   tableError
 } from "@/lib/supabase";
-import type { AgentRunRequest, FetchJobsRequest, JobPostingInput, OfferProfileInput } from "@/lib/types";
+import type {
+  AgentComparisonRequest,
+  AgentComparisonRow,
+  AgentRunHistory,
+  AgentRunRequest,
+  AgentTelemetry,
+  AgentTraceStep,
+  BuyerPersona,
+  FetchJobsRequest,
+  JobPostingInput,
+  LeadDiagnostic,
+  LeadSignal,
+  OfferProfileInput
+} from "@/lib/types";
 
 export async function handleApiRequest(request: NextRequest, path: string[]) {
   try {
@@ -36,6 +49,18 @@ export async function handleApiRequest(request: NextRequest, path: string[]) {
     }
     if (resource === "agent" && id === "run" && request.method === "POST") {
       return await runAgent(request);
+    }
+    if (resource === "agent" && id === "runs" && request.method === "GET") {
+      return await agentRuns(request);
+    }
+    if (resource === "agent" && id === "compare" && request.method === "POST") {
+      return await compareAgent(request);
+    }
+    if (resource === "demo" && id === "reset" && request.method === "POST") {
+      return await demoReset();
+    }
+    if (resource === "exports") {
+      return await exports(request, id);
     }
     if (resource === "slack") {
       return await slack(request, id);
@@ -112,16 +137,7 @@ async function offers(request: NextRequest, id?: string) {
 async function jobs(request: NextRequest, id?: string, action?: string) {
   const supabase = getSupabase();
   if (id === "load-sample" && request.method === "POST") {
-    const sampleJobs = await readSampleJobs();
-    const { data: existing, error: existingError } = await supabase.from("job_postings").select("source,external_id");
-    tableError(existingError);
-    const existingKeys = new Set((existing || []).map((row) => `${row.source}:${row.external_id}`));
-    const rows = sampleJobs.map(jobPayload);
-    const { error } = await supabase.from("job_postings").upsert(rows, { onConflict: "source,external_id" });
-    tableError(error, "Could not load sample jobs.");
-    const total = await countRows("job_postings");
-    const updated = rows.filter((row) => existingKeys.has(`${row.source}:${row.external_id}`)).length;
-    return ok({ status: "loaded", added: rows.length - updated, updated, total });
+    return ok({ status: "loaded", ...await loadSampleJobsIntoDatabase() });
   }
   if (id === "fetch" && request.method === "POST") {
     const fetched = await fetchProviderJobs(await readJson<FetchJobsRequest>(request));
@@ -174,6 +190,25 @@ async function jobs(request: NextRequest, id?: string, action?: string) {
     return ok({ status: "deleted" });
   }
   throw new HttpError(405, "Method not allowed.");
+}
+
+async function demoReset() {
+  const supabase = getSupabase();
+  const { error: leadError } = await supabase.from("lead_signals").delete().neq("id", 0);
+  tableError(leadError, "Could not clear demo leads.");
+  const { error: runError } = await supabase.from("agent_runs").delete().not("id", "is", null);
+  if (runError && runError.code !== "42P01" && !runError.message?.includes("does not exist") && !runError.message?.includes("schema cache")) {
+    tableError(runError, "Could not clear demo run history.");
+  }
+  const { error: jobError } = await supabase.from("job_postings").delete().neq("id", 0);
+  tableError(jobError, "Could not clear demo jobs.");
+  const sample = await loadSampleJobsIntoDatabase();
+  return ok({
+    status: "reset",
+    message: `Demo reset complete: ${sample.total} jobs loaded and leads cleared.`,
+    leads_cleared: true,
+    jobs: sample
+  });
 }
 
 async function leads(request: NextRequest, id?: string) {
@@ -276,6 +311,73 @@ async function runAgent(request: NextRequest) {
   });
 }
 
+async function agentRuns(request: NextRequest) {
+  const limit = Math.min(Math.max(Number(request.nextUrl.searchParams.get("limit") || 6), 1), 20);
+  const supabase = getSupabase();
+  const { data, error } = await supabase
+    .from("agent_runs")
+    .select("*")
+    .order("created_at", { ascending: false })
+    .limit(limit);
+  tableError(error, "Could not load agent run history.");
+  return ok({ status: "ok", runs: (data || []).map(normalizeAgentRun) });
+}
+
+async function compareAgent(request: NextRequest) {
+  await ensureDefaultOffers();
+  const supabase = getSupabase();
+  const payload = await readJson<AgentComparisonRequest>(request);
+  const offerId = parseId(String(payload.offer_id || ""), "Offer id is invalid.");
+  const buyerPersona = normalizePersona(payload.buyer_persona);
+  const [{ data: offerRow, error: offerError }, { data: jobRows, error: jobError }] = await Promise.all([
+    supabase.from("offer_profiles").select("*").eq("id", offerId).single(),
+    supabase.from("job_postings").select("*").order("posted_at", { ascending: false })
+  ]);
+  if (offerError?.code === "PGRST116") {
+    throw new HttpError(404, "Offer not found.");
+  }
+  tableError(offerError);
+  tableError(jobError);
+  const offer = normalizeOffer(offerRow);
+  const jobs = (jobRows || []).map(normalizeJob);
+  const baseline = previewLeadRanking([offer], jobs, {
+    buyer_persona: buyerPersona,
+    scoring_weights: payload.baseline_weights
+  });
+  const challenger = previewLeadRanking([offer], jobs, {
+    buyer_persona: buyerPersona,
+    scoring_weights: payload.challenger_weights
+  });
+  const rows = comparisonRows(baseline, challenger);
+  return ok({
+    status: "ok",
+    offer_id: offerId,
+    offer_name: offer.name,
+    buyer_persona: buyerPersona,
+    baseline_weights: payload.baseline_weights,
+    challenger_weights: payload.challenger_weights,
+    rows
+  });
+}
+
+async function exports(request: NextRequest, id?: string) {
+  if (request.method !== "GET") {
+    throw new HttpError(405, "Method not allowed.");
+  }
+  if (id === "leads") {
+    const supabase = getSupabase();
+    const { data, error } = await supabase.from("lead_signals").select("*").order("score", { ascending: false }).order("created_at", { ascending: false });
+    tableError(error, "Could not export leads.");
+    const leads = (data || []).map(normalizeLead);
+    return csv(leadsCsv(leads), "signalscout-ranked-leads.csv");
+  }
+  if (id === "diagnostics") {
+    const latest = await latestAgentRun();
+    return csv(diagnosticsCsv(latest?.diagnostics_json || []), "signalscout-diagnostics.csv");
+  }
+  throw new HttpError(404, "Export route not found.");
+}
+
 async function slack(request: NextRequest, id?: string) {
   const supabase = getSupabase();
   const { data, error } = await supabase.from("lead_signals").select("*").order("score", { ascending: false }).order("created_at", { ascending: false }).limit(5);
@@ -297,6 +399,20 @@ async function countRows(table: "offer_profiles" | "job_postings" | "lead_signal
   return count || 0;
 }
 
+async function loadSampleJobsIntoDatabase() {
+  const supabase = getSupabase();
+  const sampleJobs = await readSampleJobs();
+  const { data: existing, error: existingError } = await supabase.from("job_postings").select("source,external_id");
+  tableError(existingError);
+  const existingKeys = new Set((existing || []).map((row) => `${row.source}:${row.external_id}`));
+  const rows = sampleJobs.map(jobPayload);
+  const { error } = await supabase.from("job_postings").upsert(rows, { onConflict: "source,external_id" });
+  tableError(error, "Could not load sample jobs.");
+  const total = await countRows("job_postings");
+  const updated = rows.filter((row) => existingKeys.has(`${row.source}:${row.external_id}`)).length;
+  return { added: rows.length - updated, updated, total };
+}
+
 function parseId(value: string | undefined, message: string) {
   const parsed = Number(value);
   if (!value || !Number.isInteger(parsed) || parsed <= 0) {
@@ -312,4 +428,155 @@ async function tryInsertAgentRun(payload: Record<string, unknown>) {
     return;
   }
   console.warn("Agent run audit was not stored.", error.message);
+}
+
+async function latestAgentRun() {
+  const supabase = getSupabase();
+  const { data, error } = await supabase
+    .from("agent_runs")
+    .select("*")
+    .order("created_at", { ascending: false })
+    .limit(1);
+  tableError(error, "Could not load latest agent diagnostics.");
+  const first = data?.[0];
+  return first ? normalizeAgentRun(first) : null;
+}
+
+function normalizeAgentRun(row: Record<string, unknown>): AgentRunHistory {
+  return {
+    id: String(row.id || ""),
+    offer_ids: Array.isArray(row.offer_ids) ? row.offer_ids.map((value) => Number(value)).filter(Number.isFinite) : [],
+    buyer_persona: normalizePersona(row.buyer_persona),
+    prompt_version: String(row.prompt_version || ""),
+    model: String(row.model || ""),
+    created_leads: Number(row.created_leads || 0),
+    duration_ms: Number(row.duration_ms || 0),
+    diagnostics_json: normalizeDiagnostics(row.diagnostics_json),
+    telemetry_json: normalizeTelemetry(row.telemetry_json),
+    trace_json: normalizeTrace(row.trace_json),
+    created_at: String(row.created_at || "")
+  };
+}
+
+function comparisonRows(
+  baseline: ReturnType<typeof previewLeadRanking>,
+  challenger: ReturnType<typeof previewLeadRanking>
+): AgentComparisonRow[] {
+  const baseMap = new Map(baseline.map((item) => [item.company_domain, item]));
+  const challengeMap = new Map(challenger.map((item) => [item.company_domain, item]));
+  const domains = [...new Set([...baseMap.keys(), ...challengeMap.keys()])];
+  return domains.map((domain) => {
+    const base = baseMap.get(domain);
+    const challenge = challengeMap.get(domain);
+    const baselineRank = base?.rank ?? null;
+    const challengerRank = challenge?.rank ?? null;
+    const baselineScore = base?.score ?? null;
+    const challengerScore = challenge?.score ?? null;
+    return {
+      company: challenge?.company || base?.company || domain,
+      company_domain: domain,
+      baseline_rank: baselineRank,
+      challenger_rank: challengerRank,
+      baseline_score: baselineScore,
+      challenger_score: challengerScore,
+      rank_delta: baselineRank && challengerRank ? baselineRank - challengerRank : null,
+      score_delta: baselineScore !== null && challengerScore !== null ? challengerScore - baselineScore : null,
+      top_evidence: challenge?.top_evidence || base?.top_evidence || ""
+    };
+  }).sort((a, b) => {
+    if (a.challenger_rank && b.challenger_rank) {
+      return a.challenger_rank - b.challenger_rank;
+    }
+    return (a.challenger_rank || 999) - (b.challenger_rank || 999);
+  });
+}
+
+function normalizePersona(value: unknown): BuyerPersona {
+  return value === "it" || value === "security" || value === "data" || value === "revops" ? value : "revops";
+}
+
+function normalizeDiagnostics(value: unknown): LeadDiagnostic[] {
+  return Array.isArray(value) ? value as LeadDiagnostic[] : [];
+}
+
+function normalizeTrace(value: unknown): AgentTraceStep[] {
+  return Array.isArray(value) ? value as AgentTraceStep[] : [];
+}
+
+function normalizeTelemetry(value: unknown): AgentTelemetry | null {
+  return value && typeof value === "object" && !Array.isArray(value) ? value as AgentTelemetry : null;
+}
+
+function leadsCsv(leads: LeadSignal[]) {
+  const rows = leads.map((lead, index) => {
+    const top = lead.evidence_jobs_json[0];
+    return [
+      index + 1,
+      lead.company,
+      lead.score,
+      lead.relevance_score,
+      lead.urgency_score,
+      lead.confidence_score,
+      top?.title || "",
+      top?.source || "",
+      top?.role_driver || "",
+      lead.signal_summary,
+      lead.inferred_pain,
+      lead.outreach_subject,
+      lead.outreach_body
+    ];
+  });
+  return toCsv([
+    "rank",
+    "company",
+    "score",
+    "relevance_score",
+    "urgency_score",
+    "confidence_score",
+    "top_evidence_title",
+    "top_evidence_source",
+    "role_driver",
+    "signal_summary",
+    "inferred_pain",
+    "outreach_subject",
+    "outreach_body"
+  ], rows);
+}
+
+function diagnosticsCsv(diagnostics: LeadDiagnostic[]) {
+  const rows = diagnostics.map((item, index) => [
+    index + 1,
+    item.company,
+    item.company_domain,
+    item.title,
+    item.source,
+    item.score,
+    item.reason,
+    item.negative_hits.join("; "),
+    item.missing_keywords.join("; "),
+    item.url
+  ]);
+  return toCsv([
+    "rank",
+    "company",
+    "company_domain",
+    "title",
+    "source",
+    "score",
+    "reason",
+    "negative_hits",
+    "missing_keywords",
+    "url"
+  ], rows);
+}
+
+function toCsv(headers: string[], rows: Array<Array<string | number>>) {
+  return [headers, ...rows]
+    .map((row) => row.map((value) => csvCell(value)).join(","))
+    .join("\r\n");
+}
+
+function csvCell(value: string | number) {
+  const text = String(value ?? "");
+  return `"${text.replace(/"/g, "\"\"")}"`;
 }

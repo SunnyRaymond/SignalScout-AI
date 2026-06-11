@@ -112,6 +112,24 @@ export async function buildLeadSignals(offers: OfferProfile[], jobs: JobPosting[
   };
 }
 
+export function previewLeadRanking(offers: OfferProfile[], jobs: JobPosting[], options: AgentOptions = {}) {
+  const buyerPersona = options.buyer_persona || "revops";
+  const extracted = extractEvidenceDrafts(offers, jobs, { ...options, buyer_persona: buyerPersona });
+  return extracted.drafts
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 18)
+    .map((draft, index) => ({
+      rank: index + 1,
+      company: draft.company,
+      company_domain: draft.company_domain,
+      score: draft.score,
+      urgency_score: draft.urgency_score,
+      relevance_score: draft.relevance_score,
+      confidence_score: draft.confidence_score,
+      top_evidence: draft.evidence[0]?.title || ""
+    }));
+}
+
 function extractEvidenceDrafts(offers: OfferProfile[], jobs: JobPosting[], options: AgentRuntimeOptions) {
   const diagnostics: LeadDiagnostic[] = [];
   const drafts = offers.flatMap((offer) => buildDraftsForOffer(offer, jobs, options, diagnostics));

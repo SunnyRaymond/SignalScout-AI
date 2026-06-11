@@ -12,12 +12,15 @@ import {
   Clipboard,
   Cloud,
   Database,
+  Download,
   Filter,
   Gauge,
+  History,
   Layers3,
   Loader2,
   MessageSquare,
   Radar,
+  RefreshCw,
   Search,
   Send,
   ShieldCheck,
@@ -30,6 +33,8 @@ import type { LucideIcon } from "lucide-react";
 import type {
   AgentTelemetry,
   AgentTraceStep,
+  AgentComparisonRow,
+  AgentRunHistory,
   BuyerPersona,
   EvidenceJob,
   JobPosting,
@@ -73,6 +78,14 @@ type AgentRunResponse = {
   prompt_version: string;
 };
 
+type AgentRunsResponse = {
+  runs: AgentRunHistory[];
+};
+
+type AgentComparisonResponse = {
+  rows: AgentComparisonRow[];
+};
+
 const defaultOffer: OfferForm = {
   name: "Data Dashboard Agency",
   seller_description: "Sells Tableau dashboards, SQL pipelines, and executive reporting.",
@@ -82,6 +95,40 @@ const defaultOffer: OfferForm = {
 };
 
 const defaultWeights: ScoringWeights = { relevance: 45, urgency: 35, confidence: 20 };
+
+const demoScenarios: Array<{
+  id: string;
+  label: string;
+  offerName: string;
+  persona: BuyerPersona;
+  weights: ScoringWeights;
+  promise: string;
+}> = [
+  {
+    id: "data-revops",
+    label: "Data to RevOps",
+    offerName: "Data Dashboard Agency",
+    persona: "revops",
+    weights: { relevance: 45, urgency: 35, confidence: 20 },
+    promise: "Executive reporting and pipeline visibility"
+  },
+  {
+    id: "cloud-it",
+    label: "Cloud to IT",
+    offerName: "Cloud Infrastructure Consultancy",
+    persona: "it",
+    weights: { relevance: 42, urgency: 43, confidence: 15 },
+    promise: "Platform modernization and reliability"
+  },
+  {
+    id: "cyber-security",
+    label: "Cyber to Security",
+    offerName: "Cyber Risk Studio",
+    persona: "security",
+    weights: { relevance: 48, urgency: 30, confidence: 22 },
+    promise: "SOC, IAM, compliance, and risk readiness"
+  }
+];
 
 const personas: Array<{ id: BuyerPersona; label: string; description: string; icon: LucideIcon }> = [
   { id: "revops", label: "RevOps", description: "Forecasting, CRM, pipeline, GTM ops", icon: TrendingUp },
@@ -122,6 +169,8 @@ export default function Home() {
   const [diagnostics, setDiagnostics] = useState<LeadDiagnostic[]>([]);
   const [trace, setTrace] = useState<AgentTraceStep[]>([]);
   const [telemetry, setTelemetry] = useState<AgentTelemetry | null>(null);
+  const [runHistory, setRunHistory] = useState<AgentRunHistory[]>([]);
+  const [comparisonRows, setComparisonRows] = useState<AgentComparisonRow[]>([]);
   const [leadQuery, setLeadQuery] = useState("");
   const [minScore, setMinScore] = useState(0);
   const [jobQuery, setJobQuery] = useState("");
@@ -197,18 +246,24 @@ export default function Home() {
     }
     setError(null);
     try {
-      const [statusData, offerData, jobData, leadData, slackData] = await Promise.all([
+      const [statusData, offerData, jobData, leadData, slackData, historyData] = await Promise.all([
         apiFetch<Status>("/api/status"),
         apiFetch<OfferProfile[]>("/api/offers"),
         apiFetch<JobPosting[]>("/api/jobs"),
         apiFetch<LeadSignal[]>("/api/leads"),
-        apiFetch<SlackPreview>("/api/slack/preview")
+        apiFetch<SlackPreview>("/api/slack/preview"),
+        apiFetch<AgentRunsResponse>("/api/agent/runs?limit=6").catch(() => ({ runs: [] }))
       ]);
       setStatus(statusData);
       setOffers(offerData);
       setJobs(jobData);
       setLeads(leadData);
       setSlackPreview(slackData);
+      setRunHistory(historyData.runs || []);
+      const latestRun = historyData.runs?.[0];
+      setDiagnostics(latestRun?.diagnostics_json || []);
+      setTrace(latestRun?.trace_json || []);
+      setTelemetry(latestRun?.telemetry_json || null);
       if (!selectedOfferId && offerData.length > 0) {
         const preferred = offerData.find((offer) => offer.name === "Data Dashboard Agency") || offerData[0];
         setSelectedOfferId(preferred.id);
@@ -283,8 +338,30 @@ export default function Home() {
     }
   }
 
-  async function runAgent() {
-    if (!selectedOffer?.id) {
+  async function demoReset() {
+    setLoading("reset");
+    setError(null);
+    try {
+      const response = await apiFetch<{ message: string; jobs: { total: number } }>("/api/demo/reset", { method: "POST" });
+      setDiagnostics([]);
+      setTrace([]);
+      setTelemetry(null);
+      setComparisonRows([]);
+      setSelectedLead(null);
+      setNotice(response.message || `Demo reset complete: ${response.jobs.total} jobs loaded.`);
+      await loadAll(null);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Demo reset failed.");
+    } finally {
+      setLoading(null);
+    }
+  }
+
+  async function runAgent(overrides: { offerId?: number; persona?: BuyerPersona; scoringWeights?: ScoringWeights } = {}) {
+    const offerId = overrides.offerId ?? selectedOffer?.id;
+    const persona = overrides.persona ?? buyerPersona;
+    const scoringWeights = overrides.scoringWeights ?? weights;
+    if (!offerId) {
       setError("Choose an offer before running the agent.");
       return;
     }
@@ -294,17 +371,17 @@ export default function Home() {
       const response = await apiFetch<AgentRunResponse>("/api/agent/run", {
         method: "POST",
         body: JSON.stringify({
-          offer_id: selectedOffer.id,
+          offer_id: offerId,
           clear_existing: true,
-          buyer_persona: buyerPersona,
-          scoring_weights: weights
+          buyer_persona: persona,
+          scoring_weights: scoringWeights
         })
       });
       setDiagnostics(response.diagnostics || []);
       setTelemetry(response.telemetry || null);
       setTrace(response.trace || []);
       setLeads(response.leads || []);
-      setNotice(`Agent created ${response.created} ranked signals for ${personaLabel(buyerPersona)}.`);
+      setNotice(`Agent created ${response.created} ranked signals for ${personaLabel(persona)}.`);
       setActiveTab("leads");
       await loadAll(null);
     } catch (err) {
@@ -312,6 +389,62 @@ export default function Home() {
     } finally {
       setLoading(null);
     }
+  }
+
+  function applyScenario(scenario: typeof demoScenarios[number]) {
+    const offer = offers.find((item) => item.name === scenario.offerName);
+    if (!offer) {
+      setError(`Offer not found for scenario: ${scenario.offerName}.`);
+      return;
+    }
+    setSelectedOfferId(offer.id);
+    setOfferForm(fromOffer(offer));
+    setBuyerPersona(scenario.persona);
+    setWeights(scenario.weights);
+    setNotice(`${scenario.label} scenario loaded.`);
+  }
+
+  async function runScenario(scenario: typeof demoScenarios[number]) {
+    const offer = offers.find((item) => item.name === scenario.offerName);
+    if (!offer) {
+      setError(`Offer not found for scenario: ${scenario.offerName}.`);
+      return;
+    }
+    setSelectedOfferId(offer.id);
+    setOfferForm(fromOffer(offer));
+    setBuyerPersona(scenario.persona);
+    setWeights(scenario.weights);
+    await runAgent({ offerId: offer.id, persona: scenario.persona, scoringWeights: scenario.weights });
+  }
+
+  async function compareWeights() {
+    if (!selectedOffer?.id) {
+      setError("Choose an offer before comparing score presets.");
+      return;
+    }
+    setLoading("compare");
+    setError(null);
+    try {
+      const response = await apiFetch<AgentComparisonResponse>("/api/agent/compare", {
+        method: "POST",
+        body: JSON.stringify({
+          offer_id: selectedOffer.id,
+          buyer_persona: buyerPersona,
+          baseline_weights: defaultWeights,
+          challenger_weights: weights
+        })
+      });
+      setComparisonRows(response.rows || []);
+      setNotice(`Comparison ready for ${selectedOffer.name}.`);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Comparison failed.");
+    } finally {
+      setLoading(null);
+    }
+  }
+
+  function downloadCsv(kind: "leads" | "diagnostics") {
+    window.location.href = `/api/exports/${kind}`;
   }
 
   async function sendSlack() {
@@ -356,7 +489,11 @@ export default function Home() {
               {loading === "sample" ? <Loader2 className="size-4 animate-spin" /> : <Database className="size-4" />}
               Load 5x data
             </button>
-            <button onClick={runAgent} disabled={Boolean(loading) || !selectedOffer} className="btn-primary">
+            <button onClick={demoReset} disabled={Boolean(loading)} className="btn-secondary">
+              {loading === "reset" ? <Loader2 className="size-4 animate-spin" /> : <RefreshCw className="size-4" />}
+              Demo Reset
+            </button>
+            <button onClick={() => runAgent()} disabled={Boolean(loading) || !selectedOffer} className="btn-primary">
               {loading === "agent" ? <Loader2 className="size-4 animate-spin" /> : <Sparkles className="size-4" />}
               Run Agent
             </button>
@@ -407,7 +544,7 @@ export default function Home() {
                           Load enriched postings, tune the buyer persona and score weights, then show exactly why a company became a lead or why it was filtered out.
                         </p>
                       </div>
-                      <Pipeline loading={loading} onLoad={loadSampleJobs} onRun={runAgent} onSlack={sendSlack} />
+                      <Pipeline loading={loading} onLoad={loadSampleJobs} onRun={() => runAgent()} onSlack={sendSlack} />
                     </div>
                     <TopSignal lead={topLead} offer={selectedOffer} onOpen={() => topLead && setSelectedLead(topLead)} />
                   </div>
@@ -420,23 +557,28 @@ export default function Home() {
                 </div>
 
                 <div className="reveal grid gap-5 xl:col-span-2 lg:grid-cols-[0.72fr_1.28fr]">
-                  <ControlPanel
-                    offers={offers}
-                    selectedOfferId={selectedOfferId}
-                    setSelectedOfferId={setSelectedOfferId}
-                    selectedOffer={selectedOffer}
-                    buyerPersona={buyerPersona}
-                    setBuyerPersona={setBuyerPersona}
-                    weights={weights}
-                    setWeights={setWeights}
-                    integrations={status?.integrations}
-                    model={status?.model}
-                  />
+                  <div className="grid gap-5">
+                    <ControlPanel
+                      offers={offers}
+                      selectedOfferId={selectedOfferId}
+                      setSelectedOfferId={setSelectedOfferId}
+                      selectedOffer={selectedOffer}
+                      buyerPersona={buyerPersona}
+                      setBuyerPersona={setBuyerPersona}
+                      weights={weights}
+                      setWeights={setWeights}
+                      integrations={status?.integrations}
+                      model={status?.model}
+                    />
+                    <ScenarioPanel scenarios={demoScenarios} loading={loading} onApply={applyScenario} onRun={runScenario} />
+                  </div>
                   <div className="grid gap-5 lg:grid-cols-2">
                     <ProviderMix providerMix={providerMix} total={jobs.length} />
                     <DiagnosticsPanel diagnostics={diagnostics} compact />
                     <TracePanel trace={trace} />
                     <TelemetryPanel telemetry={telemetry} />
+                    <RunHistoryPanel runs={runHistory} />
+                    <ComparisonPanel rows={comparisonRows} loading={loading === "compare"} onCompare={compareWeights} baseline={defaultWeights} challenger={weights} />
                   </div>
                 </div>
 
@@ -588,6 +730,14 @@ export default function Home() {
                           <input type="range" min={0} max={95} step={5} value={minScore} onChange={(event) => setMinScore(Number(event.target.value))} />
                           <span className="text-sm font-semibold text-slate-700">{minScore}+</span>
                         </div>
+                        <button onClick={() => downloadCsv("leads")} className="btn-secondary">
+                          <Download className="size-4" />
+                          Leads CSV
+                        </button>
+                        <button onClick={() => downloadCsv("diagnostics")} className="btn-secondary">
+                          <Download className="size-4" />
+                          Diagnostics CSV
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -724,6 +874,52 @@ function ControlPanel({
         {selectedOffer && (
           <p className="rounded-lg bg-slate-50 p-3 text-sm leading-6 text-slate-700">{selectedOffer.target_customers}</p>
         )}
+      </div>
+    </div>
+  );
+}
+
+function ScenarioPanel({
+  scenarios,
+  loading,
+  onApply,
+  onRun
+}: {
+  scenarios: typeof demoScenarios;
+  loading: string | null;
+  onApply: (scenario: typeof demoScenarios[number]) => void;
+  onRun: (scenario: typeof demoScenarios[number]) => void;
+}) {
+  return (
+    <div className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <h3 className="text-lg font-semibold text-slate-950">Canned Demo Scenarios</h3>
+          <p className="text-sm text-slate-600">One click sets offer, persona, and score weights for a crisp judge story.</p>
+        </div>
+        <Badge tone="emerald">3 presets</Badge>
+      </div>
+      <div className="mt-4 grid gap-3">
+        {scenarios.map((scenario) => (
+          <div key={scenario.id} className="rounded-lg border border-slate-200 bg-slate-50 p-3">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <p className="text-sm font-semibold text-slate-950">{scenario.label}</p>
+                <p className="mt-1 text-xs leading-5 text-slate-600">{scenario.promise}</p>
+              </div>
+              <Badge tone="sky">{personaLabel(scenario.persona)}</Badge>
+            </div>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <button onClick={() => onApply(scenario)} disabled={Boolean(loading)} className="btn-secondary px-3 py-1.5 text-xs">
+                Load
+              </button>
+              <button onClick={() => onRun(scenario)} disabled={Boolean(loading)} className="btn-primary px-3 py-1.5 text-xs">
+                {loading === "agent" ? <Loader2 className="size-3.5 animate-spin" /> : <Sparkles className="size-3.5" />}
+                Run
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -886,6 +1082,98 @@ function TelemetryPanel({ telemetry }: { telemetry: AgentTelemetry | null }) {
           <MiniStat label="Est. cost" value={`$${telemetry.estimated_cost_usd.toFixed(6)}`} />
         </div>
       )}
+    </div>
+  );
+}
+
+function RunHistoryPanel({ runs }: { runs: AgentRunHistory[] }) {
+  return (
+    <div className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <h3 className="font-semibold text-slate-950">Agent Run History</h3>
+          <p className="text-sm text-slate-600">Reads from the `agent_runs` audit table.</p>
+        </div>
+        <History className="size-4 text-slate-500" />
+      </div>
+      <div className="mt-4 grid gap-3">
+        {runs.length === 0 ? (
+          <p className="text-sm text-slate-500">Run the agent after the schema migration to populate history.</p>
+        ) : runs.slice(0, 4).map((run) => (
+          <div key={run.id} className="rounded-lg border border-slate-200 bg-slate-50 p-3">
+            <div className="flex items-center justify-between gap-3">
+              <p className="text-sm font-semibold text-slate-950">{run.created_leads} leads</p>
+              <Badge tone="sky">{personaLabel(run.buyer_persona)}</Badge>
+            </div>
+            <p className="mt-1 text-xs text-slate-600">{run.model} - {run.prompt_version}</p>
+            <div className="mt-2 grid grid-cols-2 gap-2">
+              <MiniStat label="Cost" value={`$${(run.telemetry_json?.estimated_cost_usd || 0).toFixed(6)}`} />
+              <MiniStat label="Time" value={`${Math.round(run.duration_ms / 1000)}s`} />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ComparisonPanel({
+  rows,
+  loading,
+  onCompare,
+  baseline,
+  challenger
+}: {
+  rows: AgentComparisonRow[];
+  loading: boolean;
+  onCompare: () => void;
+  baseline: ScoringWeights;
+  challenger: ScoringWeights;
+}) {
+  return (
+    <div className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm lg:col-span-2">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <h3 className="font-semibold text-slate-950">Score Preset Comparison</h3>
+          <p className="text-sm text-slate-600">
+            Baseline {weightLabel(baseline)} vs current {weightLabel(challenger)}.
+          </p>
+        </div>
+        <button onClick={onCompare} disabled={loading} className="btn-secondary w-fit">
+          {loading ? <Loader2 className="size-4 animate-spin" /> : <Gauge className="size-4" />}
+          Compare weights
+        </button>
+      </div>
+      <div className="mt-4 overflow-x-auto rounded-lg border border-slate-200">
+        <table className="w-full min-w-[640px] text-left text-sm">
+          <thead className="bg-slate-50 text-xs uppercase text-slate-500">
+            <tr>
+              <th className="px-3 py-2 font-semibold">Company</th>
+              <th className="px-3 py-2 font-semibold">Base</th>
+              <th className="px-3 py-2 font-semibold">Current</th>
+              <th className="px-3 py-2 font-semibold">Move</th>
+              <th className="px-3 py-2 font-semibold">Evidence</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-200">
+            {rows.length === 0 ? (
+              <tr>
+                <td colSpan={5} className="px-3 py-8 text-center text-slate-500">Run a comparison to show rank changes.</td>
+              </tr>
+            ) : rows.slice(0, 8).map((row) => (
+              <tr key={row.company_domain} className="align-top">
+                <td className="px-3 py-2 font-semibold text-slate-950">{row.company}</td>
+                <td className="px-3 py-2 text-slate-600">#{row.baseline_rank || "-"} / {row.baseline_score ?? "-"}</td>
+                <td className="px-3 py-2 text-slate-600">#{row.challenger_rank || "-"} / {row.challenger_score ?? "-"}</td>
+                <td className="px-3 py-2">
+                  <RankDelta value={row.rank_delta} />
+                </td>
+                <td className="max-w-xs px-3 py-2 text-slate-600">{row.top_evidence}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
@@ -1132,6 +1420,18 @@ function ScoreBadge({ score }: { score: number }) {
   return <span className={`inline-flex shrink-0 rounded-full px-2.5 py-1 text-xs font-bold ring-1 ${tone}`}>{score}/100</span>;
 }
 
+function RankDelta({ value }: { value: number | null }) {
+  if (value === null || value === 0) {
+    return <span className="rounded-full bg-slate-100 px-2 py-1 text-xs font-semibold text-slate-600">No move</span>;
+  }
+  const improved = value > 0;
+  return (
+    <span className={`rounded-full px-2 py-1 text-xs font-semibold ${improved ? "bg-emerald-50 text-emerald-700" : "bg-amber-50 text-amber-700"}`}>
+      {improved ? "+" : ""}{value} ranks
+    </span>
+  );
+}
+
 function Badge({ children, tone = "slate" }: { children: ReactNode; tone?: "slate" | "sky" | "emerald" | "amber" | "rose" }) {
   const tones = {
     slate: "bg-slate-100 text-slate-700 ring-slate-200",
@@ -1222,6 +1522,10 @@ function sourceLabel(source: string) {
 
 function personaLabel(persona: BuyerPersona) {
   return personas.find((item) => item.id === persona)?.label || persona;
+}
+
+function weightLabel(value: ScoringWeights) {
+  return `${value.relevance}/${value.urgency}/${value.confidence}`;
 }
 
 async function apiFetch<T>(path: string, init: RequestInit = {}): Promise<T> {

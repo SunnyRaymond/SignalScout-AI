@@ -13,6 +13,16 @@ export function ok<T>(body: T, status = 200) {
   return NextResponse.json(body, { status });
 }
 
+export function csv(body: string, filename: string) {
+  return new NextResponse(body, {
+    status: 200,
+    headers: {
+      "Content-Type": "text/csv; charset=utf-8",
+      "Content-Disposition": `attachment; filename="${filename}"`
+    }
+  });
+}
+
 export function fail(error: unknown) {
   if (error instanceof HttpError) {
     return NextResponse.json({ detail: error.message }, { status: error.status });

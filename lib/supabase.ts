@@ -52,7 +52,7 @@ export function tableError(error: { message?: string; code?: string } | null, fa
   if (!error) {
     return;
   }
-  if (error.code === "42P01" || error.message?.includes("does not exist")) {
+  if (error.code === "42P01" || error.message?.includes("does not exist") || error.message?.includes("schema cache")) {
     throw new HttpError(500, "Supabase tables are missing. Run supabase/schema.sql in the Supabase SQL editor.");
   }
   if (error.message?.includes("fetch failed") || error.message?.includes("aborted")) {

@@ -103,6 +103,39 @@ export type AgentRunRequest = {
   scoring_weights?: ScoringWeights;
 };
 
+export type AgentRunHistory = {
+  id: string;
+  offer_ids: number[];
+  buyer_persona: BuyerPersona;
+  prompt_version: string;
+  model: string;
+  created_leads: number;
+  duration_ms: number;
+  diagnostics_json: LeadDiagnostic[];
+  telemetry_json: AgentTelemetry | null;
+  trace_json: AgentTraceStep[];
+  created_at: string;
+};
+
+export type AgentComparisonRequest = {
+  offer_id: number;
+  buyer_persona?: BuyerPersona;
+  baseline_weights: ScoringWeights;
+  challenger_weights: ScoringWeights;
+};
+
+export type AgentComparisonRow = {
+  company: string;
+  company_domain: string;
+  baseline_rank: number | null;
+  challenger_rank: number | null;
+  baseline_score: number | null;
+  challenger_score: number | null;
+  rank_delta: number | null;
+  score_delta: number | null;
+  top_evidence: string;
+};
+
 export type FetchJobsRequest = {
   source?: "muse" | "adzuna" | "greenhouse" | "lever" | "workday" | "linkedin_export";
   query?: string;

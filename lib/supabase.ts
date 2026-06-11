@@ -1,7 +1,7 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { defaultOffers } from "@/lib/defaults";
 import { HttpError } from "@/lib/http";
-import type { JobPosting, JobPostingInput, LeadSignal, LeadSignalInput, OfferProfile, OfferProfileInput } from "@/lib/types";
+import type { JobPosting, JobPostingInput, LeadSignal, LeadSignalInput, OfferProfile, OfferProfileInput, ScoringWeights } from "@/lib/types";
 
 let cached: SupabaseClient | null = null;
 
@@ -80,6 +80,7 @@ export function normalizeOffer(row: Record<string, unknown>): OfferProfile {
     target_customers: String(row.target_customers || ""),
     keywords: normalizeStringArray(row.keywords),
     negative_keywords: normalizeStringArray(row.negative_keywords),
+    scoring_weights: normalizeScoringWeights(row.scoring_weights),
     created_at: optionalString(row.created_at),
     updated_at: optionalString(row.updated_at)
   };
@@ -175,6 +176,18 @@ function normalizeStringArray(value: unknown) {
     return value.split(/,|\n/).map((item) => item.trim()).filter(Boolean);
   }
   return [];
+}
+
+function normalizeScoringWeights(value: unknown): ScoringWeights {
+  const record = normalizeRecord(value);
+  const relevance = Number(record.relevance ?? 45);
+  const urgency = Number(record.urgency ?? 35);
+  const confidence = Number(record.confidence ?? 20);
+  return {
+    relevance: Number.isFinite(relevance) ? relevance : 45,
+    urgency: Number.isFinite(urgency) ? urgency : 35,
+    confidence: Number.isFinite(confidence) ? confidence : 20
+  };
 }
 
 function requiredString(value: unknown, message: string) {

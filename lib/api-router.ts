@@ -1,5 +1,5 @@
 import type { NextRequest } from "next/server";
-import { buildLeadSignals } from "@/lib/agent";
+import { buildLeadSignals, promptVersion } from "@/lib/agent";
 import { fetchProviderJobs } from "@/lib/job-providers";
 import { HttpError, fail, ok, readJson } from "@/lib/http";
 import { readSampleJobs } from "@/lib/sample-jobs";
@@ -209,6 +209,8 @@ async function runAgent(request: NextRequest) {
   await ensureDefaultOffers();
   const supabase = getSupabase();
   const payload = await readJson<AgentRunRequest>(request);
+  const startedAt = Date.now();
+  const buyerPersona = payload.buyer_persona || "revops";
   let offersQuery = supabase.from("offer_profiles").select("*").order("id");
   if (payload.offer_id) {
     offersQuery = offersQuery.eq("id", payload.offer_id);
@@ -225,20 +227,53 @@ async function runAgent(request: NextRequest) {
   }
   const jobs = (jobRows || []).map(normalizeJob);
   if (offers.length === 0 || jobs.length === 0) {
-    return ok({ status: "ok", created: 0, leads: [] });
+    return ok({ status: "ok", created: 0, leads: [], diagnostics: [], trace: [], telemetry: null, prompt_version: promptVersion });
   }
-  const generated = await buildLeadSignals(offers, jobs);
+  const generated = await buildLeadSignals(offers, jobs, {
+    buyer_persona: buyerPersona,
+    scoring_weights: payload.scoring_weights
+  });
   if (payload.clear_existing !== false) {
     const { error } = await supabase.from("lead_signals").delete().in("matched_offer_id", offers.map((offer) => offer.id));
     tableError(error, "Could not clear previous leads.");
   }
-  if (generated.length === 0) {
-    return ok({ status: "ok", created: 0, leads: [] });
+  if (generated.leads.length === 0) {
+    await tryInsertAgentRun({
+      offer_ids: offers.map((offer) => offer.id),
+      buyer_persona: buyerPersona,
+      prompt_version: promptVersion,
+      model: generated.telemetry.model,
+      created_leads: 0,
+      duration_ms: Date.now() - startedAt,
+      diagnostics_json: generated.diagnostics,
+      telemetry_json: generated.telemetry,
+      trace_json: generated.trace
+    });
+    return ok({ status: "ok", created: 0, leads: [], diagnostics: generated.diagnostics, trace: generated.trace, telemetry: generated.telemetry, prompt_version: promptVersion });
   }
-  const { data, error } = await supabase.from("lead_signals").insert(generated).select("*");
+  const { data, error } = await supabase.from("lead_signals").insert(generated.leads).select("*");
   tableError(error, "Could not save generated leads.");
   const leadsOut = (data || []).map(normalizeLead).sort((a, b) => b.score - a.score);
-  return ok({ status: "ok", created: leadsOut.length, leads: leadsOut });
+  await tryInsertAgentRun({
+    offer_ids: offers.map((offer) => offer.id),
+    buyer_persona: buyerPersona,
+    prompt_version: promptVersion,
+    model: generated.telemetry.model,
+    created_leads: leadsOut.length,
+    duration_ms: Date.now() - startedAt,
+    diagnostics_json: generated.diagnostics,
+    telemetry_json: generated.telemetry,
+    trace_json: generated.trace
+  });
+  return ok({
+    status: "ok",
+    created: leadsOut.length,
+    leads: leadsOut,
+    diagnostics: generated.diagnostics,
+    trace: generated.trace,
+    telemetry: generated.telemetry,
+    prompt_version: promptVersion
+  });
 }
 
 async function slack(request: NextRequest, id?: string) {
@@ -268,4 +303,13 @@ function parseId(value: string | undefined, message: string) {
     throw new HttpError(400, message);
   }
   return parsed;
+}
+
+async function tryInsertAgentRun(payload: Record<string, unknown>) {
+  const supabase = getSupabase();
+  const { error } = await supabase.from("agent_runs").insert(payload);
+  if (!error || error.code === "42P01" || error.message?.includes("does not exist")) {
+    return;
+  }
+  console.warn("Agent run audit was not stored.", error.message);
 }

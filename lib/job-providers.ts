@@ -1,4 +1,5 @@
 import { HttpError } from "@/lib/http";
+import { readSampleJobs } from "@/lib/sample-jobs";
 import type { FetchJobsRequest, JobPostingInput } from "@/lib/types";
 
 export async function fetchProviderJobs(payload: FetchJobsRequest): Promise<{ message: string; jobs: JobPostingInput[] }> {
@@ -9,7 +10,23 @@ export async function fetchProviderJobs(payload: FetchJobsRequest): Promise<{ me
   if (source === "adzuna") {
     return fetchAdzunaJobs(query, location, limit);
   }
+  if (source === "greenhouse" || source === "lever" || source === "workday" || source === "linkedin_export") {
+    return fetchDemoProviderJobs(source, query, location, limit);
+  }
   return fetchMuseJobs(query, location, limit);
+}
+
+async function fetchDemoProviderJobs(source: NonNullable<FetchJobsRequest["source"]>, query: string, location: string, limit: number) {
+  const terms = normalizeSearch(`${query} ${location}`).split(" ").filter((term) => term.length > 2);
+  const jobs = (await readSampleJobs())
+    .filter((job) => job.source === source)
+    .filter((job) => {
+      const text = normalizeSearch(`${job.title} ${job.company} ${job.location} ${job.description}`);
+      return terms.length === 0 || terms.some((term) => text.includes(term));
+    })
+    .slice(0, limit);
+  const label = source === "linkedin_export" ? "LinkedIn export" : source[0].toUpperCase() + source.slice(1);
+  return { message: `Loaded ${jobs.length} demo jobs from ${label}.`, jobs };
 }
 
 async function fetchMuseJobs(query: string, location: string, limit: number) {
@@ -81,4 +98,8 @@ function stripHtml(value: string) {
 function normalizeDate(value: string) {
   const parsed = new Date(value);
   return Number.isNaN(parsed.getTime()) ? new Date().toISOString() : parsed.toISOString();
+}
+
+function normalizeSearch(value: string) {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 }

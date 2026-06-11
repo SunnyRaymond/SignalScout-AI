@@ -5,7 +5,7 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"]
+        sans: ["Plus Jakarta Sans", "ui-sans-serif", "system-ui", "sans-serif"]
       },
       boxShadow: {
         soft: "0 18px 50px rgba(16, 24, 40, 0.10)"

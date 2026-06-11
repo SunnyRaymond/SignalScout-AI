@@ -46,13 +46,34 @@ create table if not exists public.lead_signals (
 create index if not exists lead_signals_score_idx on public.lead_signals (score desc);
 create index if not exists lead_signals_offer_idx on public.lead_signals (matched_offer_id);
 
+alter table public.offer_profiles
+  add column if not exists scoring_weights jsonb not null default '{"relevance":45,"urgency":35,"confidence":20}'::jsonb;
+
+create table if not exists public.agent_runs (
+  id uuid primary key default gen_random_uuid(),
+  offer_ids bigint[] not null default '{}',
+  buyer_persona text not null default 'revops',
+  prompt_version text not null,
+  model text not null,
+  created_leads integer not null default 0,
+  duration_ms integer not null default 0,
+  diagnostics_json jsonb not null default '[]'::jsonb,
+  telemetry_json jsonb not null default '{}'::jsonb,
+  trace_json jsonb not null default '[]'::jsonb,
+  created_at timestamptz not null default now()
+);
+
+create index if not exists agent_runs_created_at_idx on public.agent_runs (created_at desc);
+
 alter table public.offer_profiles enable row level security;
 alter table public.job_postings enable row level security;
 alter table public.lead_signals enable row level security;
+alter table public.agent_runs enable row level security;
 
 drop policy if exists "service role access offer profiles" on public.offer_profiles;
 drop policy if exists "service role access job postings" on public.job_postings;
 drop policy if exists "service role access lead signals" on public.lead_signals;
+drop policy if exists "service role access agent runs" on public.agent_runs;
 
 create policy "service role access offer profiles"
   on public.offer_profiles
@@ -68,6 +89,12 @@ create policy "service role access job postings"
 
 create policy "service role access lead signals"
   on public.lead_signals
+  for all
+  using (auth.role() = 'service_role')
+  with check (auth.role() = 'service_role');
+
+create policy "service role access agent runs"
+  on public.agent_runs
   for all
   using (auth.role() = 'service_role')
   with check (auth.role() = 'service_role');

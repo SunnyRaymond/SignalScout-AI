@@ -1,5 +1,5 @@
 {
-  "name": "signalscout-ai-frontend",
+  "name": "signalscout-ai",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,6 +9,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.87.1",
     "@types/node": "22.10.2",
     "@types/react": "^19.2.15",
     "@types/react-dom": "^19.2.3",

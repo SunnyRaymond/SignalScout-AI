@@ -1,10 +1,14 @@
 .env
+.env.local
 .venv/
 __pycache__/
 *.pyc
 *.log
 signalscout.db
 backend/signalscout.db
+node_modules/
+.next/
+out/
 frontend/.next/
 frontend/node_modules/
 frontend/out/

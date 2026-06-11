@@ -2,14 +2,14 @@ import nextVitals from "eslint-config-next/core-web-vitals";
 import nextTypescript from "eslint-config-next/typescript";
 
 const eslintConfig = [
+  { ignores: [".next/**", "out/**", "build/**", "node_modules/**", ".edge-screenshot-profile*/**", ".pages-test/**", ".venv/**", "frontend/**", "backend/**", "next-env.d.ts"] },
   ...nextVitals,
   ...nextTypescript,
   {
     rules: {
       "react-hooks/set-state-in-effect": "off"
     }
-  },
-  { ignores: [".next/**", "out/**", "build/**", "next-env.d.ts"] }
+  }
 ];
 
 export default eslintConfig;

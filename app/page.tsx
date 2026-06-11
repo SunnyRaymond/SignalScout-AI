@@ -3,10 +3,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { BarChart3, BriefcaseBusiness, CheckCircle2, Clipboard, Cloud, Database, Loader2, MessageSquare, Radar, Search, Send, SlidersHorizontal, Sparkles, Target, X } from "lucide-react";
-import { demoApiFetch } from "@/lib/demo-api";
-
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000";
-const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 type OfferProfile = {
   id: number;
@@ -167,7 +163,7 @@ export default function Home() {
         setOfferForm(fromOffer(preferred));
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Could not reach the backend.");
+      setError(err instanceof Error ? err.message : "Could not reach the SignalScout API.");
     } finally {
       setLoading(null);
     }
@@ -285,7 +281,7 @@ export default function Home() {
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 py-4 sm:px-6 lg:px-8">
         <header className="flex flex-col gap-4 rounded-lg border border-white/70 bg-white/82 p-4 shadow-soft backdrop-blur md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-3">
-            <Image src={`${BASE_PATH}/logo.svg`} alt="SignalScout AI logo" width={48} height={48} className="rounded-lg" priority />
+            <Image src="/logo.svg" alt="SignalScout AI logo" width={48} height={48} className="rounded-lg" priority />
             <div>
               <h1 className="text-2xl font-semibold tracking-normal text-slate-950">SignalScout AI</h1>
               <p className="text-sm text-slate-600">Job postings into B2B buying signals and Slack-ready outreach.</p>
@@ -811,10 +807,7 @@ function formatDate(value: string) {
 }
 
 async function apiFetch<T>(path: string, init: RequestInit = {}): Promise<T> {
-  if (API_BASE === "demo") {
-    return demoApiFetch<T>(path, init);
-  }
-  const response = await fetch(`${API_BASE}${path}`, {
+  const response = await fetch(path, {
     ...init,
     headers: {
       "Content-Type": "application/json",
@@ -825,7 +818,7 @@ async function apiFetch<T>(path: string, init: RequestInit = {}): Promise<T> {
     let detail = `${response.status} ${response.statusText}`;
     try {
       const payload = await response.json();
-      detail = payload.detail || detail;
+      detail = payload.detail || payload.error || detail;
     } catch {
       detail = response.statusText;
     }

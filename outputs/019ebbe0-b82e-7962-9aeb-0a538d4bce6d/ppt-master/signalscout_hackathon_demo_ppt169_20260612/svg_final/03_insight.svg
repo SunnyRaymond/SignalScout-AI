@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect x="0" y="0" width="1280" height="720" fill="#FFFFFF" />
+  <g id="header">
+    <path fill="#10B981" fill-opacity="0.10" stroke="#10B981" d="M70,40 H124 A14,14 0 0 1 138,54 V54 A14,14 0 0 1 124,68 H70 A14,14 0 0 1 56,54 V54 A14,14 0 0 1 70,40 Z" />
+    <text x="97" y="60" text-anchor="middle" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="12" font-weight="800" fill="#0F172A">INSIGHT</text>
+    <text x="56" y="116" font-family="Georgia, Microsoft YaHei, serif" font-size="42" font-weight="700" fill="#0F172A">Hiring is a public trail of operational intent.</text>
+    <text x="56" y="152" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="18" fill="#475569">A job post is not proof of budget, but it is evidence of a business priority.</text>
+  </g>
+  <g id="signal-table">
+    <path fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2" d="M86,200 H1194 A14,14 0 0 1 1208,214 V568 A14,14 0 0 1 1194,582 H86 A14,14 0 0 1 72,568 V214 A14,14 0 0 1 86,200 Z" />
+    <path fill="#0F172A" d="M86,200 H1194 A14,14 0 0 1 1208,214 V242 A14,14 0 0 1 1194,256 H86 A14,14 0 0 1 72,242 V214 A14,14 0 0 1 86,200 Z" />
+    <text x="104" y="236" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="800" fill="#FFFFFF">HIRING PATTERN</text>
+    <text x="548" y="236" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="800" fill="#FFFFFF">POSSIBLE BUYING SIGNAL</text>
+    <text x="1032" y="236" text-anchor="middle" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="800" fill="#FFFFFF">BEST-FIT SELLER</text>
+    <line x1="520" y1="200" x2="520" y2="582" stroke="#E2E8F0" stroke-width="1.5" />
+    <line x1="936" y1="200" x2="936" y2="582" stroke="#E2E8F0" stroke-width="1.5" />
+    <g id="row-1">
+      <rect x="72" y="256" width="1136" height="65" fill="#10B981" fill-opacity="0.08" />
+      <text x="104" y="294" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="18" font-weight="800" fill="#0F172A">BI Analyst + Tableau Developer</text>
+      <text x="548" y="294" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="18" fill="#0F172A">Dashboard backlog or reporting initiative</text>
+      <text x="1032" y="294" text-anchor="middle" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="16" font-weight="700" fill="#0F172A">Dashboard agency</text>
+    </g>
+    <g id="row-2">
+      <line x1="72" y1="321" x2="1208" y2="321" stroke="#E2E8F0" />
+      <text x="104" y="359" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="18" font-weight="700" fill="#0F172A">Data Engineer + Analytics Engineer</text>
+      <text x="548" y="359" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="18" fill="#475569">Pipeline or metrics-layer buildout</text>
+      <text x="1032" y="359" text-anchor="middle" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="16" fill="#475569">Data consultancy</text>
+    </g>
+    <g id="row-3">
+      <line x1="72" y1="386" x2="1208" y2="386" stroke="#E2E8F0" />
+      <text x="104" y="424" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="18" font-weight="700" fill="#0F172A">Cloud Engineer + SRE</text>
+      <text x="548" y="424" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="18" fill="#475569">Infrastructure modernization or reliability push</text>
+      <text x="1032" y="424" text-anchor="middle" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="16" fill="#475569">Cloud partner</text>
+    </g>
+    <g id="row-4">
+      <line x1="72" y1="451" x2="1208" y2="451" stroke="#E2E8F0" />
+      <text x="104" y="489" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="18" font-weight="700" fill="#0F172A">Security Engineer + IAM role</text>
+      <text x="548" y="489" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="18" fill="#475569">Compliance, access, or risk readiness work</text>
+      <text x="1032" y="489" text-anchor="middle" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="16" fill="#475569">Security vendor</text>
+    </g>
+    <g id="row-5">
+      <line x1="72" y1="516" x2="1208" y2="516" stroke="#E2E8F0" />
+      <text x="104" y="554" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="18" font-weight="700" fill="#0F172A">Automation Specialist + RevOps Manager</text>
+      <text x="548" y="554" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="18" fill="#475569">Process automation and GTM operations gap</text>
+      <text x="1032" y="554" text-anchor="middle" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="16" fill="#475569">AI automation shop</text>
+    </g>
+  </g>
+  <g id="takeaway">
+    <path fill="#F8FAFC" stroke="#E2E8F0" d="M176,612 H1104 A22,22 0 0 1 1126,634 V634 A22,22 0 0 1 1104,656 H176 A22,22 0 0 1 154,634 V634 A22,22 0 0 1 176,612 Z" />
+    <text x="640" y="640" text-anchor="middle" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="16" font-weight="700" fill="#0F172A">The bridge is role evidence to vendor need. SignalScout makes that bridge repeatable.</text>
+  </g>
+  <g id="footer">
+    <text x="56" y="684" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="12" font-weight="700" fill="#94A3B8">Hiring patterns are evidence, not guaranteed purchase intent</text>
+    <text x="1224" y="684" text-anchor="end" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="12" font-weight="700" fill="#94A3B8">03 / 08</text>
+  </g>
+</svg>

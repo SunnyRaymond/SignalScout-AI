@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect x="0" y="0" width="1280" height="720" fill="#FFFFFF"/>
+  <g id="top-bar">
+    <circle cx="88" cy="82" r="28" fill="#0F172A"/>
+    <path d="M72 88 C82 68 100 68 106 88" fill="none" stroke="#10B981" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="90" cy="83" r="6" fill="#38BDF8"/>
+    <text x="134" y="88" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="18" font-weight="800" fill="#0F172A">SignalScout AI</text>
+    <rect x="1038" y="58" width="162" height="32" rx="16" fill="#10B981" fill-opacity="0.12" stroke="#10B981"/>
+    <text x="1119" y="79" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="12" font-weight="800" fill="#0F172A">LIVE WEBSITE DEMO</text>
+  </g>
+  <g id="hero">
+    <text x="88" y="246" font-family='Georgia, Microsoft YaHei, serif' font-size="70" font-weight="700" fill="#0F172A">Now we run it live.</text>
+    <rect x="92" y="276" width="448" height="8" rx="4" fill="#10B981"/>
+    <text x="92" y="336" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="26" font-weight="700" fill="#0F172A">Watch the loop convert public hiring signals into a sales-ready account.</text>
+    <text x="92" y="382" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="19" fill="#475569">
+      <tspan x="92" dy="0">Job data -> hiring signal -> lead score -> outreach draft -> Slack digest</tspan>
+    </text>
+  </g>
+  <g id="demo-orbit">
+    <circle cx="974" cy="346" r="154" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="2"/>
+    <circle cx="974" cy="346" r="94" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+    <circle cx="974" cy="346" r="42" fill="#0F172A"/>
+    <use data-icon="tabler-outline/send" x="950" y="322" width="48" height="48" fill="#FFFFFF" stroke-width="2"/>
+    <g id="node-data">
+      <circle cx="866" cy="238" r="31" fill="#10B981"/>
+      <use data-icon="tabler-outline/database" x="848" y="220" width="36" height="36" fill="#FFFFFF" stroke-width="2"/>
+      <text x="866" y="194" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="14" font-weight="800" fill="#0F172A">Data</text>
+    </g>
+    <g id="node-score">
+      <circle cx="1112" cy="276" r="31" fill="#38BDF8"/>
+      <use data-icon="tabler-outline/chart-bar" x="1094" y="258" width="36" height="36" fill="#FFFFFF" stroke-width="2"/>
+      <text x="1112" y="232" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="14" font-weight="800" fill="#0F172A">Score</text>
+    </g>
+    <g id="node-evidence">
+      <circle cx="1090" cy="458" r="31" fill="#0F172A"/>
+      <use data-icon="tabler-outline/message-2-check" x="1072" y="440" width="36" height="36" fill="#FFFFFF" stroke-width="2"/>
+      <text x="1090" y="515" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="14" font-weight="800" fill="#0F172A">Evidence</text>
+    </g>
+    <g id="node-team">
+      <circle cx="828" cy="448" r="31" fill="#F59E0B"/>
+      <use data-icon="tabler-outline/users" x="810" y="430" width="36" height="36" fill="#FFFFFF" stroke-width="2"/>
+      <text x="828" y="505" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="14" font-weight="800" fill="#0F172A">Team</text>
+    </g>
+  </g>
+  <g id="bottom-prompt">
+    <rect x="88" y="558" width="584" height="64" rx="32" fill="#0F172A"/>
+    <text x="380" y="598" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="18" font-weight="800" fill="#FFFFFF">The next 8 to 10 minutes are product, not slides.</text>
+  </g>
+  <g id="footer">
+    <text x="56" y="684" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="12" font-weight="700" fill="#94A3B8">Transition slide</text>
+    <text x="1224" y="684" text-anchor="end" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="12" font-weight="700" fill="#94A3B8">08 / 08</text>
+  </g>
+</svg>

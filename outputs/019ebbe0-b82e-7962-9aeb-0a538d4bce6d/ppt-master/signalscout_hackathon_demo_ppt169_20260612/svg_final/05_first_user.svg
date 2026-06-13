@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect x="0" y="0" width="1280" height="720" fill="#F8FAFC" />
+  <g id="header">
+    <path fill="#FFFFFF" stroke="#E2E8F0" d="M70,40 H158 A14,14 0 0 1 172,54 V54 A14,14 0 0 1 158,68 H70 A14,14 0 0 1 56,54 V54 A14,14 0 0 1 70,40 Z" />
+    <text x="114" y="60" text-anchor="middle" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="12" font-weight="800" fill="#475569">FIRST USER</text>
+    <text x="56" y="116" font-family="Georgia, Microsoft YaHei, serif" font-size="42" font-weight="700" fill="#0F172A">Built first for agencies and consultancies.</text>
+    <text x="56" y="152" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="18" fill="#475569">These teams sell expertise into companies that are already changing.</text>
+  </g>
+  <g id="pillars">
+    <g id="pillar-dashboard">
+      <path fill="#FFFFFF" stroke="#E2E8F0" d="M86,218 H318 A14,14 0 0 1 332,232 V534 A14,14 0 0 1 318,548 H86 A14,14 0 0 1 72,534 V232 A14,14 0 0 1 86,218 Z" />
+      <path fill="#10B981" fill-opacity="0.14" d="M86,218 H318 A14,14 0 0 1 332,232 V280 A14,14 0 0 1 318,294 H86 A14,14 0 0 1 72,280 V232 A14,14 0 0 1 86,218 Z" />
+      
+  <g transform="translate(96.0, 237.0) scale(1.5)" fill="none" stroke="#10B981" stroke-width="2">
+    <path d="M3 13a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -6" />
+    <path d="M15 9a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v10a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -10" />
+    <path d="M9 5a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -14" />
+    <path d="M4 20h14" />
+  </g>
+      <text x="145" y="246" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="18" font-weight="800" fill="#0F172A">Data-dashboard</text>
+      <text x="146" y="272" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="18" font-weight="800" fill="#0F172A">agencies</text>
+      <text font-size="16" fill="#475569" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" x="96" y="337">RevOps and BI roles</text><text font-size="16" fill="#475569" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" x="96" y="361">signal reporting pain,</text><text font-size="16" fill="#475569" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" x="96" y="385">dashboard backlog, and</text><text font-size="16" fill="#475569" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" x="96" y="409">pipeline visibility needs.</text></g>
+    <g id="pillar-cloud">
+      <path fill="#FFFFFF" stroke="#E2E8F0" d="M376,218 H608 A14,14 0 0 1 622,232 V534 A14,14 0 0 1 608,548 H376 A14,14 0 0 1 362,534 V232 A14,14 0 0 1 376,218 Z" />
+      <path fill="#38BDF8" fill-opacity="0.14" d="M376,218 H608 A14,14 0 0 1 622,232 V280 A14,14 0 0 1 608,294 H376 A14,14 0 0 1 362,280 V232 A14,14 0 0 1 376,218 Z" />
+      
+  <g transform="translate(386.0, 237.0) scale(1.5)" fill="none" stroke="#38BDF8" stroke-width="2">
+    <path d="M4 6a8 3 0 1 0 16 0a8 3 0 1 0 -16 0" />
+    <path d="M4 6v6a8 3 0 0 0 16 0v-6" />
+    <path d="M4 12v6a8 3 0 0 0 16 0v-6" />
+  </g>
+      <text x="434" y="247" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="18" font-weight="800" fill="#0F172A">Cloud migration</text>
+      <text x="434" y="274" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="18" font-weight="800" fill="#0F172A">consultancies</text>
+      <text font-size="16" fill="#475569" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" x="386" y="337">Cloud engineers and SRE</text><text font-size="16" fill="#475569" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" x="386" y="361">roles point to reliability,</text><text font-size="16" fill="#475569" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" x="386" y="385">modernization, and platform</text><text font-size="16" fill="#475569" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" x="386" y="409">operations projects.</text></g>
+    <g id="pillar-security">
+      <path fill="#FFFFFF" stroke="#E2E8F0" d="M666,218 H898 A14,14 0 0 1 912,232 V534 A14,14 0 0 1 898,548 H666 A14,14 0 0 1 652,534 V232 A14,14 0 0 1 666,218 Z" />
+      <path fill="#0F172A" fill-opacity="0.08" d="M666,218 H898 A14,14 0 0 1 912,232 V280 A14,14 0 0 1 898,294 H666 A14,14 0 0 1 652,280 V232 A14,14 0 0 1 666,218 Z" />
+      
+  <g transform="translate(676.0, 237.0) scale(1.5)" fill="none" stroke="#0F172A" stroke-width="2">
+    <path d="M11 12a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+    <path d="M7 12a5 5 0 1 0 10 0a5 5 0 1 0 -10 0" />
+    <path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+  </g>
+      <text x="725" y="244" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="18" font-weight="800" fill="#0F172A">Cybersecurity</text>
+      <text x="728" y="272" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="18" font-weight="800" fill="#0F172A">vendors</text>
+      <text font-size="16" fill="#475569" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" x="676" y="337">Security, compliance, and</text><text font-size="16" fill="#475569" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" x="676" y="361">IAM hiring can reveal access,</text><text font-size="16" fill="#475569" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" x="676" y="385">risk readiness, and audit</text><text font-size="16" fill="#475569" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" x="676" y="409">pressure before RFPs appear.</text></g>
+    <g id="pillar-automation">
+      <path fill="#FFFFFF" stroke="#E2E8F0" d="M956,218 H1188 A14,14 0 0 1 1202,232 V534 A14,14 0 0 1 1188,548 H956 A14,14 0 0 1 942,534 V232 A14,14 0 0 1 956,218 Z" />
+      <path fill="#F59E0B" fill-opacity="0.14" d="M956,218 H1188 A14,14 0 0 1 1202,232 V280 A14,14 0 0 1 1188,294 H956 A14,14 0 0 1 942,280 V232 A14,14 0 0 1 956,218 Z" />
+      
+  <g transform="translate(966.0, 237.0) scale(1.5)" fill="none" stroke="#F59E0B" stroke-width="2">
+    <path d="M4 6h16" />
+    <path d="M6 12h9.5" />
+    <path d="M9 18h2.5" />
+    <path d="M19 21.5c.205 -.849 .641 -1.625 1.258 -2.242c.617 -.617 1.393 -1.053 2.242 -1.258c-.849 -.205 -1.625 -.641 -2.242 -1.258c-.617 -.617 -1.053 -1.393 -1.258 -2.242c-.205 .849 -.641 1.625 -1.258 2.242c-.617 .617 -1.393 1.053 -2.242 1.258c.849 .205 1.625 .641 2.242 1.258c.617 .617 1.053 1.393 1.258 2.242" />
+  </g>
+      <text x="1014" y="243" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="18" font-weight="800" fill="#0F172A">AI automation</text>
+      <text x="1017" y="271" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="18" font-weight="800" fill="#0F172A">providers</text>
+      <text font-size="16" fill="#475569" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" x="966" y="337">Automation and operations</text><text font-size="16" fill="#475569" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" x="966" y="361">roles suggest process gaps</text><text font-size="16" fill="#475569" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" x="966" y="385">that service providers can</text><text font-size="16" fill="#475569" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" x="966" y="409">turn into specific outreach.</text></g>
+  </g>
+  <g id="wedge-callout">
+    <path fill="#0F172A" d="M207,592 H1073 A27,27 0 0 1 1100,619 V619 A27,27 0 0 1 1073,646 H207 A27,27 0 0 1 180,619 V619 A27,27 0 0 1 207,592 Z" />
+    
+  <g transform="translate(214.0, 606.0) scale(1.1666666666666667)" fill="none" stroke="#10B981" stroke-width="2">
+    <path d="M3 9a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2l0 -9" />
+    <path d="M8 7v-2a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v2" />
+    <path d="M12 12l0 .01" />
+    <path d="M3 13a20 20 0 0 0 18 0" />
+  </g>
+    <text x="662" y="626" text-anchor="middle" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="17" font-weight="800" fill="#FFFFFF">First wedge: service providers that need timely, specific reasons to start sales conversations.</text>
+  </g>
+  <g id="footer">
+    <text x="56" y="684" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="12" font-weight="700" fill="#94A3B8">Beachhead ICP: service providers selling expertise</text>
+    <text x="1224" y="684" text-anchor="end" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="12" font-weight="700" fill="#94A3B8">05 / 08</text>
+  </g>
+</svg>

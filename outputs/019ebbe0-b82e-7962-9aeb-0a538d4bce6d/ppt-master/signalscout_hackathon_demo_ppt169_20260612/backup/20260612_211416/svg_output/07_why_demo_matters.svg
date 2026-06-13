@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect x="0" y="0" width="1280" height="720" fill="#F8FAFC"/>
+  <g id="header">
+    <rect x="56" y="40" width="132" height="28" rx="14" fill="#FFFFFF" stroke="#E2E8F0"/>
+    <text x="122" y="60" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="12" font-weight="800" fill="#475569">DEMO VALUE</text>
+    <text x="56" y="116" font-family='Georgia, Microsoft YaHei, serif' font-size="42" font-weight="700" fill="#0F172A">What judges should see in the live demo.</text>
+    <text x="56" y="152" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="18" fill="#475569">SignalScout compresses prospect research into a workflow that can be repeated every morning.</text>
+  </g>
+  <g id="metric-strip">
+    <rect x="56" y="196" width="352" height="104" rx="14" fill="#FFFFFF" stroke="#E2E8F0"/>
+    <text x="84" y="233" font-family='Georgia, Microsoft YaHei, serif' font-size="38" font-weight="700" fill="#10B981">260</text>
+    <text x="174" y="229" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="16" font-weight="800" fill="#0F172A">jobs visible</text>
+    <text x="174" y="253" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="14" fill="#475569">in the local demo dataset</text>
+    <rect x="56" y="324" width="352" height="104" rx="14" fill="#FFFFFF" stroke="#E2E8F0"/>
+    <text x="84" y="361" font-family='Georgia, Microsoft YaHei, serif' font-size="38" font-weight="700" fill="#38BDF8">63</text>
+    <text x="174" y="357" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="16" font-weight="800" fill="#0F172A">ranked leads</text>
+    <text x="174" y="381" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="14" fill="#475569">with evidence-backed context</text>
+    <rect x="56" y="452" width="352" height="104" rx="14" fill="#0F172A"/>
+    <text x="84" y="489" font-family='Georgia, Microsoft YaHei, serif' font-size="38" font-weight="700" fill="#FFFFFF">100</text>
+    <text x="190" y="485" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="16" font-weight="800" fill="#FFFFFF">top lead score</text>
+    <text x="190" y="509" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="14" fill="#E2E8F0">shown for Atlas Logistics</text>
+  </g>
+  <g id="vertical-list">
+    <rect x="470" y="196" width="754" height="360" rx="18" fill="#FFFFFF" stroke="#E2E8F0"/>
+    <line x1="526" y1="256" x2="526" y2="492" stroke="#E2E8F0" stroke-width="3"/>
+    <g id="reason-one">
+      <circle cx="526" cy="256" r="24" fill="#10B981"/>
+      <use data-icon="tabler-outline/target" x="512" y="242" width="28" height="28" fill="#FFFFFF" stroke-width="2"/>
+      <text x="574" y="250" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="20" font-weight="800" fill="#0F172A">Timing replaces list age</text>
+      <text x="574" y="278" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="15" fill="#475569">The conversation starts while the company is actively changing its team.</text>
+    </g>
+    <g id="reason-two">
+      <circle cx="526" cy="335" r="24" fill="#38BDF8"/>
+      <use data-icon="tabler-outline/filter-2-spark" x="512" y="321" width="28" height="28" fill="#FFFFFF" stroke-width="2"/>
+      <text x="574" y="329" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="20" font-weight="800" fill="#0F172A">Evidence replaces guessing</text>
+      <text x="574" y="357" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="15" fill="#475569">Each account includes roles, matched patterns, inferred pain, and draft context.</text>
+    </g>
+    <g id="reason-three">
+      <circle cx="526" cy="414" r="24" fill="#0F172A"/>
+      <use data-icon="tabler-outline/chart-bar" x="512" y="400" width="28" height="28" fill="#FFFFFF" stroke-width="2"/>
+      <text x="574" y="408" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="20" font-weight="800" fill="#0F172A">Ranking replaces manual triage</text>
+      <text x="574" y="436" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="15" fill="#475569">A seller can begin with the highest-fit accounts instead of sorting raw postings.</text>
+    </g>
+    <g id="reason-four">
+      <circle cx="526" cy="492" r="24" fill="#F59E0B"/>
+      <use data-icon="tabler-outline/send" x="512" y="478" width="28" height="28" fill="#FFFFFF" stroke-width="2"/>
+      <text x="574" y="486" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="20" font-weight="800" fill="#0F172A">Slack handoff replaces hidden research</text>
+      <text x="574" y="514" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="15" fill="#475569">The output lands where the team already reviews and assigns selling priorities.</text>
+    </g>
+  </g>
+  <g id="closing-line">
+    <rect x="470" y="586" width="754" height="58" rx="29" fill="#0F172A"/>
+    <text x="847" y="622" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="18" font-weight="800" fill="#FFFFFF">The live website should prove the loop, not explain more slides.</text>
+  </g>
+  <g id="footer">
+    <text x="56" y="684" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="12" font-weight="700" fill="#94A3B8">Demo setup: frame the value, then switch to the product</text>
+    <text x="1224" y="684" text-anchor="end" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="12" font-weight="700" fill="#94A3B8">07 / 08</text>
+  </g>
+</svg>

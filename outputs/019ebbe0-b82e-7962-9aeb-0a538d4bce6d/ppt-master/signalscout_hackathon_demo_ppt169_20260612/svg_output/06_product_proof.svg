@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <clipPath id="leadWorkspaceClip">
+      <rect x="518" y="150" width="650" height="451" rx="18"/>
+    </clipPath>
+  </defs>
+  <rect x="0" y="0" width="1280" height="720" fill="#FFFFFF"/>
+  <g id="header">
+    <rect x="56" y="40" width="102" height="28" rx="14" fill="#10B981" fill-opacity="0.12" stroke="#10B981"/>
+    <text x="107" y="60" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="12" font-weight="800" fill="#0F172A">PRODUCT PROOF</text>
+    <text x="56" y="116" font-family='Georgia, Microsoft YaHei, serif' font-size="42" font-weight="700" fill="#0F172A">SignalScout already completes the loop.</text>
+    <text x="56" y="152" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="18" fill="#475569">Live data becomes ranked sales action.</text>
+  </g>
+  <g id="proof-rail">
+    <line x1="96" y1="240" x2="96" y2="515" stroke="#E2E8F0" stroke-width="3"/>
+    <g id="proof-source">
+      <circle cx="96" cy="240" r="24" fill="#10B981"/>
+      <use data-icon="tabler-outline/database" x="82" y="226" width="28" height="28" fill="#FFFFFF" stroke-width="2"/>
+      <text x="142" y="231" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="18" font-weight="800" fill="#0F172A">260 postings -> signal feed</text>
+      <text x="142" y="258" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="15" fill="#475569">
+        <tspan x="142" dy="0">Seed postings become</tspan>
+        <tspan x="142" dy="21">provider-style job signals.</tspan>
+      </text>
+    </g>
+    <g id="proof-rank">
+      <circle cx="96" cy="378" r="24" fill="#0F172A"/>
+      <use data-icon="tabler-outline/chart-bar" x="82" y="364" width="28" height="28" fill="#FFFFFF" stroke-width="2"/>
+      <text x="142" y="369" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="18" font-weight="800" fill="#0F172A">Atlas Logistics -> top lead</text>
+      <text x="142" y="396" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="15" fill="#475569">
+        <tspan x="142" dy="0">Score, evidence, and pain</tspan>
+        <tspan x="142" dy="21">sit in one workspace.</tspan>
+      </text>
+    </g>
+    <g id="proof-handoff">
+      <circle cx="96" cy="515" r="24" fill="#38BDF8"/>
+      <use data-icon="tabler-outline/send" x="82" y="501" width="28" height="28" fill="#FFFFFF" stroke-width="2"/>
+      <text x="142" y="506" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="18" font-weight="800" fill="#0F172A">Outreach + Slack -> ready</text>
+      <text x="142" y="533" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="15" fill="#475569">
+        <tspan x="142" dy="0">The seller moves from</tspan>
+        <tspan x="142" dy="21">insight to team action.</tspan>
+      </text>
+    </g>
+  </g>
+  <g id="live-screenshot">
+    <rect x="510" y="142" width="666" height="467" rx="24" fill="#0F172A" fill-opacity="0.08"/>
+    <rect x="518" y="150" width="650" height="451" rx="18" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+    <image href="../images/lead-workspace-live.png" x="518" y="150" width="650" height="451" preserveAspectRatio="xMidYMid meet" clip-path="url(#leadWorkspaceClip)"/>
+    <rect x="518" y="150" width="650" height="451" rx="18" fill="none" stroke="#10B981" stroke-width="2"/>
+  </g>
+  <g id="bottom-takeaway">
+    <rect x="302" y="630" width="676" height="42" rx="21" fill="#F8FAFC" stroke="#E2E8F0"/>
+    <text x="640" y="657" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="16" font-weight="800" fill="#0F172A">Concrete outcome: signal feed -> ranked account -> seller handoff.</text>
+  </g>
+  <g id="footer">
+    <text x="56" y="684" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="12" font-weight="700" fill="#94A3B8">Live product proof: data -> rank -> handoff</text>
+    <text x="1224" y="684" text-anchor="end" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="12" font-weight="700" fill="#94A3B8">06 / 08</text>
+  </g>
+</svg>

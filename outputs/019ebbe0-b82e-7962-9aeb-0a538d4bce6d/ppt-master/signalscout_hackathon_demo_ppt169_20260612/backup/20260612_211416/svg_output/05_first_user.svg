@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect x="0" y="0" width="1280" height="720" fill="#F8FAFC"/>
+  <g id="header">
+    <rect x="56" y="40" width="116" height="28" rx="14" fill="#FFFFFF" stroke="#E2E8F0"/>
+    <text x="114" y="60" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="12" font-weight="800" fill="#475569">FIRST USER</text>
+    <text x="56" y="116" font-family='Georgia, Microsoft YaHei, serif' font-size="42" font-weight="700" fill="#0F172A">Built first for agencies and consultancies.</text>
+    <text x="56" y="152" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="18" fill="#475569">These teams sell expertise into companies that are already changing.</text>
+  </g>
+  <g id="pillars">
+    <g id="pillar-dashboard">
+      <rect x="72" y="218" width="260" height="330" rx="14" fill="#FFFFFF" stroke="#E2E8F0"/>
+      <rect x="72" y="218" width="260" height="76" rx="14" fill="#10B981" fill-opacity="0.14"/>
+      <use data-icon="tabler-outline/chart-bar" x="96" y="237" width="36" height="36" fill="#10B981" stroke-width="2"/>
+      <text x="148" y="260" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="18" font-weight="800" fill="#0F172A">Data-dashboard</text>
+      <text x="148" y="284" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="18" font-weight="800" fill="#0F172A">agencies</text>
+      <text x="96" y="337" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="16" fill="#475569">
+        <tspan x="96" dy="0">RevOps and BI roles</tspan>
+        <tspan x="96" dy="24">signal reporting pain,</tspan>
+        <tspan x="96" dy="24">dashboard backlog, and</tspan>
+        <tspan x="96" dy="24">pipeline visibility needs.</tspan>
+      </text>
+    </g>
+    <g id="pillar-cloud">
+      <rect x="362" y="218" width="260" height="330" rx="14" fill="#FFFFFF" stroke="#E2E8F0"/>
+      <rect x="362" y="218" width="260" height="76" rx="14" fill="#38BDF8" fill-opacity="0.14"/>
+      <use data-icon="tabler-outline/database" x="386" y="237" width="36" height="36" fill="#38BDF8" stroke-width="2"/>
+      <text x="438" y="260" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="18" font-weight="800" fill="#0F172A">Cloud migration</text>
+      <text x="438" y="284" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="18" font-weight="800" fill="#0F172A">consultancies</text>
+      <text x="386" y="337" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="16" fill="#475569">
+        <tspan x="386" dy="0">Cloud engineers and SRE</tspan>
+        <tspan x="386" dy="24">roles point to reliability,</tspan>
+        <tspan x="386" dy="24">modernization, and platform</tspan>
+        <tspan x="386" dy="24">operations projects.</tspan>
+      </text>
+    </g>
+    <g id="pillar-security">
+      <rect x="652" y="218" width="260" height="330" rx="14" fill="#FFFFFF" stroke="#E2E8F0"/>
+      <rect x="652" y="218" width="260" height="76" rx="14" fill="#0F172A" fill-opacity="0.08"/>
+      <use data-icon="tabler-outline/target" x="676" y="237" width="36" height="36" fill="#0F172A" stroke-width="2"/>
+      <text x="728" y="260" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="18" font-weight="800" fill="#0F172A">Cybersecurity</text>
+      <text x="728" y="284" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="18" font-weight="800" fill="#0F172A">vendors</text>
+      <text x="676" y="337" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="16" fill="#475569">
+        <tspan x="676" dy="0">Security, compliance, and</tspan>
+        <tspan x="676" dy="24">IAM hiring can reveal access,</tspan>
+        <tspan x="676" dy="24">risk readiness, and audit</tspan>
+        <tspan x="676" dy="24">pressure before RFPs appear.</tspan>
+      </text>
+    </g>
+    <g id="pillar-automation">
+      <rect x="942" y="218" width="260" height="330" rx="14" fill="#FFFFFF" stroke="#E2E8F0"/>
+      <rect x="942" y="218" width="260" height="76" rx="14" fill="#F59E0B" fill-opacity="0.14"/>
+      <use data-icon="tabler-outline/filter-2-spark" x="966" y="237" width="36" height="36" fill="#F59E0B" stroke-width="2"/>
+      <text x="1018" y="260" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="18" font-weight="800" fill="#0F172A">AI automation</text>
+      <text x="1018" y="284" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="18" font-weight="800" fill="#0F172A">providers</text>
+      <text x="966" y="337" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="16" fill="#475569">
+        <tspan x="966" dy="0">Automation and operations</tspan>
+        <tspan x="966" dy="24">roles suggest process gaps</tspan>
+        <tspan x="966" dy="24">that service providers can</tspan>
+        <tspan x="966" dy="24">turn into specific outreach.</tspan>
+      </text>
+    </g>
+  </g>
+  <g id="wedge-callout">
+    <rect x="180" y="592" width="920" height="54" rx="27" fill="#0F172A"/>
+    <use data-icon="tabler-outline/briefcase" x="214" y="606" width="28" height="28" fill="#10B981" stroke-width="2"/>
+    <text x="266" y="626" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="17" font-weight="800" fill="#FFFFFF">First wedge:</text>
+    <text x="360" y="626" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="17" fill="#E2E8F0">service providers that need timely, specific reasons to start sales conversations.</text>
+  </g>
+  <g id="footer">
+    <text x="56" y="684" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="12" font-weight="700" fill="#94A3B8">Initial ICP from SLIDE_PREP.md</text>
+    <text x="1224" y="684" text-anchor="end" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="12" font-weight="700" fill="#94A3B8">05 / 08</text>
+  </g>
+</svg>

@@ -1,0 +1,7 @@
+No,Filename,Width,Height,AspectRatio,PixelAspectRatio,RatioSource,UsageCount,DisplayRatioVariants,AssetKind,SvgRenderable,PptxNativeSupported,SizeKB,Category,ImageArea_SxS,TextArea_SxS
+1,dashboard-live.png,1440,1000,1.44,1.44,pixel,1,,bitmap,True,True,338.6,Standard landscape,812x564,328x600
+2,dashboard.png,1440,1000,1.44,1.44,pixel,1,,bitmap,True,True,252.3,Standard landscape,812x564,328x600
+3,lead-detail.png,1440,1000,1.44,1.44,pixel,1,,bitmap,True,True,214.5,Standard landscape,812x564,328x600
+4,lead-workspace-live.png,1440,1000,1.44,1.44,pixel,1,,bitmap,True,True,398.1,Standard landscape,812x564,328x600
+5,slack-preview-live.png,1440,1000,1.44,1.44,pixel,1,,bitmap,True,True,348.3,Standard landscape,812x564,328x600
+6,slack-preview.png,1440,1000,1.44,1.44,pixel,1,,bitmap,True,True,225.3,Standard landscape,812x564,328x600

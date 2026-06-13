@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <marker id="arrowHead" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#38BDF8" />
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1280" height="720" fill="#FFFFFF" />
+  <g id="header">
+    <path fill="#38BDF8" fill-opacity="0.12" stroke="#38BDF8" d="M70,40 H128 A14,14 0 0 1 142,54 V54 A14,14 0 0 1 128,68 H70 A14,14 0 0 1 56,54 V54 A14,14 0 0 1 70,40 Z" />
+    <text x="99" y="60" text-anchor="middle" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="12" font-weight="800" fill="#0F172A">PRODUCT</text>
+    <text x="56" y="116" font-family="Georgia, Microsoft YaHei, serif" font-size="42" font-weight="700" fill="#0F172A">SignalScout turns hiring behavior into sales action.</text>
+    <text x="56" y="152" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="18" fill="#475569">It is a workflow, not just a scraper: each stage creates an artifact the seller can use.</text>
+  </g>
+  <g id="pipeline">
+    <line x1="140" y1="344" x2="1140" y2="344" stroke="#38BDF8" stroke-width="4" marker-end="url(#arrowHead)" />
+    <g id="stage-job-data">
+      <path fill="#F8FAFC" stroke="#E2E8F0" d="M88,224 H264 A14,14 0 0 1 278,238 V460 A14,14 0 0 1 264,474 H88 A14,14 0 0 1 74,460 V238 A14,14 0 0 1 88,224 Z" />
+      <circle cx="176" cy="272" r="31" fill="#FFFFFF" stroke="#10B981" stroke-width="2" />
+      
+  <g transform="translate(156.0, 252.0) scale(1.6666666666666667)" fill="none" stroke="#10B981" stroke-width="2">
+    <path d="M4 6a8 3 0 1 0 16 0a8 3 0 1 0 -16 0" />
+    <path d="M4 6v6a8 3 0 0 0 16 0v-6" />
+    <path d="M4 12v6a8 3 0 0 0 16 0v-6" />
+  </g>
+      <text x="176" y="336" text-anchor="middle" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="800" fill="#0F172A">Job data</text>
+      <text font-size="15" text-anchor="middle" fill="#475569" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" x="176" y="370">Postings by company</text><text font-size="15" text-anchor="middle" fill="#475569" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" x="176" y="392">and source</text><path fill="#10B981" fill-opacity="0.10" d="M126,424 H226 A14,14 0 0 1 240,438 V438 A14,14 0 0 1 226,452 H126 A14,14 0 0 1 112,438 V438 A14,14 0 0 1 126,424 Z" />
+      <text x="176" y="443" text-anchor="middle" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="12" font-weight="800" fill="#0F172A">OUTPUT: FEED</text>
+    </g>
+    <g id="stage-signal">
+      <path fill="#FFFFFF" stroke="#E2E8F0" d="M316,224 H492 A14,14 0 0 1 506,238 V460 A14,14 0 0 1 492,474 H316 A14,14 0 0 1 302,460 V238 A14,14 0 0 1 316,224 Z" />
+      <circle cx="404" cy="272" r="31" fill="#FFFFFF" stroke="#10B981" stroke-width="2" />
+      
+  <g transform="translate(384.0, 252.0) scale(1.6666666666666667)" fill="none" stroke="#10B981" stroke-width="2">
+    <path d="M4 6h16" />
+    <path d="M6 12h9.5" />
+    <path d="M9 18h2.5" />
+    <path d="M19 21.5c.205 -.849 .641 -1.625 1.258 -2.242c.617 -.617 1.393 -1.053 2.242 -1.258c-.849 -.205 -1.625 -.641 -2.242 -1.258c-.617 -.617 -1.053 -1.393 -1.258 -2.242c-.205 .849 -.641 1.625 -1.258 2.242c-.617 .617 -1.393 1.053 -2.242 1.258c.849 .205 1.625 .641 2.242 1.258c.617 .617 1.053 1.393 1.258 2.242" />
+  </g>
+      <text x="404" y="336" text-anchor="middle" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="800" fill="#0F172A">Hiring signal</text>
+      <text font-size="15" text-anchor="middle" fill="#475569" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" x="404" y="370">Role pattern plus</text><text font-size="15" text-anchor="middle" fill="#475569" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" x="404" y="392">matched evidence</text><path fill="#10B981" fill-opacity="0.10" d="M351,424 H457 A14,14 0 0 1 471,438 V438 A14,14 0 0 1 457,452 H351 A14,14 0 0 1 337,438 V438 A14,14 0 0 1 351,424 Z" />
+      <text x="404" y="443" text-anchor="middle" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="12" font-weight="800" fill="#0F172A">OUTPUT: REASON</text>
+    </g>
+    <g id="stage-score">
+      <path fill="#FFFFFF" stroke="#10B981" stroke-width="2" d="M544,224 H720 A14,14 0 0 1 734,238 V460 A14,14 0 0 1 720,474 H544 A14,14 0 0 1 530,460 V238 A14,14 0 0 1 544,224 Z" />
+      <circle cx="632" cy="272" r="31" fill="#0F172A" />
+      
+  <g transform="translate(612.0, 252.0) scale(1.6666666666666667)" fill="none" stroke="#FFFFFF" stroke-width="2">
+    <path d="M3 13a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -6" />
+    <path d="M15 9a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v10a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -10" />
+    <path d="M9 5a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -14" />
+    <path d="M4 20h14" />
+  </g>
+      <text x="632" y="336" text-anchor="middle" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="800" fill="#0F172A">Lead score</text>
+      <text font-size="15" text-anchor="middle" fill="#475569" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" x="632" y="370">Relevance, urgency,</text><text font-size="15" text-anchor="middle" fill="#475569" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" x="632" y="392">and confidence</text><path fill="#10B981" d="M582,424 H682 A14,14 0 0 1 696,438 V438 A14,14 0 0 1 682,452 H582 A14,14 0 0 1 568,438 V438 A14,14 0 0 1 582,424 Z" />
+      <text x="632" y="443" text-anchor="middle" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">OUTPUT: RANK</text>
+    </g>
+    <g id="stage-outreach">
+      <path fill="#FFFFFF" stroke="#E2E8F0" d="M772,224 H948 A14,14 0 0 1 962,238 V460 A14,14 0 0 1 948,474 H772 A14,14 0 0 1 758,460 V238 A14,14 0 0 1 772,224 Z" />
+      <circle cx="860" cy="272" r="31" fill="#FFFFFF" stroke="#10B981" stroke-width="2" />
+      
+  <g transform="translate(840.0, 252.0) scale(1.6666666666666667)" fill="none" stroke="#10B981" stroke-width="2">
+    <path d="M8 9h8" />
+    <path d="M8 13h6" />
+    <path d="M12 21l-1 -1l-2 -2h-3a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v6" />
+    <path d="M15 19l2 2l4 -4" />
+  </g>
+      <text x="860" y="336" text-anchor="middle" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="800" fill="#0F172A">Outreach draft</text>
+      <text font-size="15" text-anchor="middle" fill="#475569" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" x="860" y="370">Grounded opening</text><text font-size="15" text-anchor="middle" fill="#475569" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" x="860" y="392">line and pain</text><path fill="#10B981" fill-opacity="0.10" d="M804,424 H916 A14,14 0 0 1 930,438 V438 A14,14 0 0 1 916,452 H804 A14,14 0 0 1 790,438 V438 A14,14 0 0 1 804,424 Z" />
+      <text x="860" y="443" text-anchor="middle" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="12" font-weight="800" fill="#0F172A">OUTPUT: EMAIL</text>
+    </g>
+    <g id="stage-digest">
+      <path fill="#F8FAFC" stroke="#E2E8F0" d="M1000,224 H1176 A14,14 0 0 1 1190,238 V460 A14,14 0 0 1 1176,474 H1000 A14,14 0 0 1 986,460 V238 A14,14 0 0 1 1000,224 Z" />
+      <circle cx="1088" cy="272" r="31" fill="#FFFFFF" stroke="#10B981" stroke-width="2" />
+      
+  <g transform="translate(1068.0, 252.0) scale(1.6666666666666667)" fill="none" stroke="#10B981" stroke-width="2">
+    <path d="M10 14l11 -11" />
+    <path d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5" />
+  </g>
+      <text x="1088" y="336" text-anchor="middle" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="800" fill="#0F172A">Slack digest</text>
+      <text font-size="15" text-anchor="middle" fill="#475569" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" x="1088" y="370">Morning team</text><text font-size="15" text-anchor="middle" fill="#475569" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" x="1088" y="392">handoff</text><path fill="#10B981" fill-opacity="0.10" d="M1038,424 H1138 A14,14 0 0 1 1152,438 V438 A14,14 0 0 1 1138,452 H1038 A14,14 0 0 1 1024,438 V438 A14,14 0 0 1 1038,424 Z" />
+      <text x="1088" y="443" text-anchor="middle" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="12" font-weight="800" fill="#0F172A">OUTPUT: DIGEST</text>
+    </g>
+  </g>
+  <g id="takeaway">
+    <path fill="#0F172A" d="M220,548 H1060 A14,14 0 0 1 1074,562 V604 A14,14 0 0 1 1060,618 H220 A14,14 0 0 1 206,604 V562 A14,14 0 0 1 220,548 Z" />
+    <text x="640" y="578" text-anchor="middle" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="18" font-weight="800" fill="#FFFFFF">The seller sees why the company is ranked, not just that it is ranked.</text>
+    <text x="640" y="604" text-anchor="middle" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" fill="#E2E8F0">That is what makes the workflow credible for a real sales team.</text>
+  </g>
+  <g id="footer">
+    <text x="56" y="674" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="12" font-weight="700" fill="#94A3B8">Workflow: job data to evidence-backed sales action</text>
+    <text x="1224" y="674" text-anchor="end" font-family="Arial, Microsoft YaHei, PingFang SC, sans-serif" font-size="12" font-weight="700" fill="#94A3B8">04 / 08</text>
+  </g>
+</svg>

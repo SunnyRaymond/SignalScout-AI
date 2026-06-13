@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect x="0" y="0" width="1280" height="720" fill="#F8FAFC"/>
+  <g id="header">
+    <rect x="56" y="40" width="154" height="28" rx="14" fill="#FFFFFF" stroke="#E2E8F0"/>
+    <text x="133" y="60" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="12" font-weight="800" fill="#475569">COMMERCIAL READY</text>
+    <text x="56" y="116" font-family='Georgia, Microsoft YaHei, serif' font-size="42" font-weight="700" fill="#0F172A">Ready to sell into service teams.</text>
+    <text x="56" y="152" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="18" fill="#475569">The product packages a daily outbound workflow agencies can adopt without changing their CRM.</text>
+  </g>
+  <g id="buyer-panel">
+    <rect x="56" y="206" width="382" height="356" rx="18" fill="#0F172A"/>
+    <text x="86" y="252" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="15" font-weight="800" fill="#38BDF8">PRIMARY BUYER</text>
+    <text x="86" y="306" font-family='Georgia, Microsoft YaHei, serif' font-size="34" font-weight="700" fill="#FFFFFF">
+      <tspan x="86" dy="0">B2B agencies</tspan>
+      <tspan x="86" dy="42">and consultancies</tspan>
+    </text>
+    <text x="86" y="402" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="17" fill="#E2E8F0">
+      <tspan x="86" dy="0">They already sell expertise.</tspan>
+      <tspan x="86" dy="28">SignalScout tells them which</tspan>
+      <tspan x="86" dy="28">accounts have timely evidence</tspan>
+      <tspan x="86" dy="28">for a focused conversation.</tspan>
+    </text>
+    <rect x="86" y="492" width="216" height="36" rx="18" fill="#10B981"/>
+    <text x="194" y="516" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="14" font-weight="800" fill="#FFFFFF">Clear first wedge</text>
+  </g>
+  <g id="readiness-list">
+    <rect x="486" y="206" width="738" height="356" rx="18" fill="#FFFFFF" stroke="#E2E8F0"/>
+    <line x1="542" y1="268" x2="542" y2="492" stroke="#E2E8F0" stroke-width="3"/>
+    <g id="ready-one">
+      <circle cx="542" cy="268" r="24" fill="#10B981"/>
+      <use data-icon="tabler-outline/database" x="528" y="254" width="28" height="28" fill="#FFFFFF" stroke-width="2"/>
+      <text x="590" y="262" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="20" font-weight="800" fill="#0F172A">Runs on public data</text>
+      <text x="590" y="290" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="15" fill="#475569">Job postings are observable, repeatable, and refreshed by the market itself.</text>
+    </g>
+    <g id="ready-two">
+      <circle cx="542" cy="343" r="24" fill="#38BDF8"/>
+      <use data-icon="tabler-outline/chart-bar" x="528" y="329" width="28" height="28" fill="#FFFFFF" stroke-width="2"/>
+      <text x="590" y="337" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="20" font-weight="800" fill="#0F172A">Produces a daily priority list</text>
+      <text x="590" y="365" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="15" fill="#475569">The buyer receives ranked accounts with evidence instead of another raw lead table.</text>
+    </g>
+    <g id="ready-three">
+      <circle cx="542" cy="418" r="24" fill="#0F172A"/>
+      <use data-icon="tabler-outline/message-2-check" x="528" y="404" width="28" height="28" fill="#FFFFFF" stroke-width="2"/>
+      <text x="590" y="412" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="20" font-weight="800" fill="#0F172A">Creates usable sales artifacts</text>
+      <text x="590" y="440" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="15" fill="#475569">Each lead comes with inferred pain, proof, and a grounded outreach draft.</text>
+    </g>
+    <g id="ready-four">
+      <circle cx="542" cy="492" r="24" fill="#F59E0B"/>
+      <use data-icon="tabler-outline/send" x="528" y="478" width="28" height="28" fill="#FFFFFF" stroke-width="2"/>
+      <text x="590" y="486" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="20" font-weight="800" fill="#0F172A">Fits existing sales motion</text>
+      <text x="590" y="514" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="15" fill="#475569">Slack digest and export paths make the workflow easy to pilot with a small team.</text>
+    </g>
+  </g>
+  <g id="closing-line">
+    <rect x="222" y="610" width="836" height="48" rx="24" fill="#FFFFFF" stroke="#E2E8F0"/>
+    <text x="640" y="641" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="17" font-weight="800" fill="#0F172A">SignalScout is not just a demo: it is a practical prospecting product with a clear buyer.</text>
+  </g>
+  <g id="footer">
+    <text x="56" y="684" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="12" font-weight="700" fill="#94A3B8">Commercial wedge: public data -> daily sales priorities</text>
+    <text x="1224" y="684" text-anchor="end" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="12" font-weight="700" fill="#94A3B8">07 / 08</text>
+  </g>
+</svg>

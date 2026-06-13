@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <marker id="arrowHead" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#38BDF8"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1280" height="720" fill="#FFFFFF"/>
+  <g id="header">
+    <rect x="56" y="40" width="86" height="28" rx="14" fill="#38BDF8" fill-opacity="0.12" stroke="#38BDF8"/>
+    <text x="99" y="60" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="12" font-weight="800" fill="#0F172A">PRODUCT</text>
+    <text x="56" y="116" font-family='Georgia, Microsoft YaHei, serif' font-size="42" font-weight="700" fill="#0F172A">SignalScout turns hiring behavior into sales action.</text>
+    <text x="56" y="152" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="18" fill="#475569">It is a workflow, not just a scraper: each stage creates an artifact the seller can use.</text>
+  </g>
+  <g id="pipeline">
+    <line x1="140" y1="344" x2="1140" y2="344" stroke="#38BDF8" stroke-width="4" marker-end="url(#arrowHead)"/>
+    <g id="stage-job-data">
+      <rect x="74" y="224" width="204" height="250" rx="14" fill="#F8FAFC" stroke="#E2E8F0"/>
+      <circle cx="176" cy="272" r="31" fill="#FFFFFF" stroke="#10B981" stroke-width="2"/>
+      <use data-icon="tabler-outline/database" x="156" y="252" width="40" height="40" fill="#10B981" stroke-width="2"/>
+      <text x="176" y="336" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="21" font-weight="800" fill="#0F172A">Job data</text>
+      <text x="176" y="370" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="15" fill="#475569">
+        <tspan x="176" dy="0">Postings by company</tspan>
+        <tspan x="176" dy="22">and source</tspan>
+      </text>
+      <rect x="112" y="424" width="128" height="28" rx="14" fill="#10B981" fill-opacity="0.10"/>
+      <text x="176" y="443" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="12" font-weight="800" fill="#0F172A">OUTPUT: FEED</text>
+    </g>
+    <g id="stage-signal">
+      <rect x="302" y="224" width="204" height="250" rx="14" fill="#FFFFFF" stroke="#E2E8F0"/>
+      <circle cx="404" cy="272" r="31" fill="#FFFFFF" stroke="#10B981" stroke-width="2"/>
+      <use data-icon="tabler-outline/filter-2-spark" x="384" y="252" width="40" height="40" fill="#10B981" stroke-width="2"/>
+      <text x="404" y="336" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="21" font-weight="800" fill="#0F172A">Hiring signal</text>
+      <text x="404" y="370" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="15" fill="#475569">
+        <tspan x="404" dy="0">Role pattern plus</tspan>
+        <tspan x="404" dy="22">matched evidence</tspan>
+      </text>
+      <rect x="337" y="424" width="134" height="28" rx="14" fill="#10B981" fill-opacity="0.10"/>
+      <text x="404" y="443" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="12" font-weight="800" fill="#0F172A">OUTPUT: REASON</text>
+    </g>
+    <g id="stage-score">
+      <rect x="530" y="224" width="204" height="250" rx="14" fill="#FFFFFF" stroke="#10B981" stroke-width="2"/>
+      <circle cx="632" cy="272" r="31" fill="#0F172A"/>
+      <use data-icon="tabler-outline/chart-bar" x="612" y="252" width="40" height="40" fill="#FFFFFF" stroke-width="2"/>
+      <text x="632" y="336" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="21" font-weight="800" fill="#0F172A">Lead score</text>
+      <text x="632" y="370" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="15" fill="#475569">
+        <tspan x="632" dy="0">Relevance, urgency,</tspan>
+        <tspan x="632" dy="22">and confidence</tspan>
+      </text>
+      <rect x="568" y="424" width="128" height="28" rx="14" fill="#10B981"/>
+      <text x="632" y="443" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="12" font-weight="800" fill="#FFFFFF">OUTPUT: RANK</text>
+    </g>
+    <g id="stage-outreach">
+      <rect x="758" y="224" width="204" height="250" rx="14" fill="#FFFFFF" stroke="#E2E8F0"/>
+      <circle cx="860" cy="272" r="31" fill="#FFFFFF" stroke="#10B981" stroke-width="2"/>
+      <use data-icon="tabler-outline/message-2-check" x="840" y="252" width="40" height="40" fill="#10B981" stroke-width="2"/>
+      <text x="860" y="336" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="21" font-weight="800" fill="#0F172A">Outreach draft</text>
+      <text x="860" y="370" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="15" fill="#475569">
+        <tspan x="860" dy="0">Grounded opening</tspan>
+        <tspan x="860" dy="22">line and pain</tspan>
+      </text>
+      <rect x="790" y="424" width="140" height="28" rx="14" fill="#10B981" fill-opacity="0.10"/>
+      <text x="860" y="443" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="12" font-weight="800" fill="#0F172A">OUTPUT: EMAIL</text>
+    </g>
+    <g id="stage-digest">
+      <rect x="986" y="224" width="204" height="250" rx="14" fill="#F8FAFC" stroke="#E2E8F0"/>
+      <circle cx="1088" cy="272" r="31" fill="#FFFFFF" stroke="#10B981" stroke-width="2"/>
+      <use data-icon="tabler-outline/send" x="1068" y="252" width="40" height="40" fill="#10B981" stroke-width="2"/>
+      <text x="1088" y="336" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="21" font-weight="800" fill="#0F172A">Slack digest</text>
+      <text x="1088" y="370" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="15" fill="#475569">
+        <tspan x="1088" dy="0">Morning team</tspan>
+        <tspan x="1088" dy="22">handoff</tspan>
+      </text>
+      <rect x="1024" y="424" width="128" height="28" rx="14" fill="#10B981" fill-opacity="0.10"/>
+      <text x="1088" y="443" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="12" font-weight="800" fill="#0F172A">OUTPUT: DIGEST</text>
+    </g>
+  </g>
+  <g id="takeaway">
+    <rect x="206" y="548" width="868" height="70" rx="14" fill="#0F172A"/>
+    <text x="640" y="578" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="18" font-weight="800" fill="#FFFFFF">The seller sees why the company is ranked, not just that it is ranked.</text>
+    <text x="640" y="604" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="15" fill="#E2E8F0">That is what makes the live demo defensible in front of judges.</text>
+  </g>
+  <g id="footer">
+    <text x="56" y="674" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="12" font-weight="700" fill="#94A3B8">Workflow: job data to evidence-backed sales action</text>
+    <text x="1224" y="674" text-anchor="end" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="12" font-weight="700" fill="#94A3B8">04 / 08</text>
+  </g>
+</svg>

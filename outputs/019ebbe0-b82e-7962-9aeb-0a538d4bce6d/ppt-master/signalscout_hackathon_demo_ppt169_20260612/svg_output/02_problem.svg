@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect x="0" y="0" width="1280" height="720" fill="#FFFFFF"/>
+  <g id="header">
+    <rect x="56" y="44" width="92" height="28" rx="14" fill="#F8FAFC" stroke="#E2E8F0"/>
+    <text x="102" y="64" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="12" font-weight="700" fill="#475569">PROBLEM</text>
+    <text x="56" y="124" font-family='Georgia, Microsoft YaHei, serif' font-size="42" font-weight="700" fill="#0F172A">Outbound teams are late to the signal.</text>
+    <text x="56" y="160" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="18" fill="#475569">The issue is not finding more companies. It is knowing when a company has a credible reason to buy.</text>
+  </g>
+  <g id="contrast-static">
+    <rect x="72" y="218" width="500" height="286" rx="14" fill="#F8FAFC" stroke="#E2E8F0"/>
+    <rect x="72" y="218" width="500" height="54" rx="14" fill="#0F172A"/>
+    <text x="96" y="253" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="18" font-weight="800" fill="#FFFFFF">Static lead lists</text>
+    <text x="96" y="314" font-family='Georgia, Microsoft YaHei, serif' font-size="30" font-weight="700" fill="#0F172A">Who exists</text>
+    <g id="static-items">
+      <circle cx="106" cy="362" r="5" fill="#94A3B8"/>
+      <text x="124" y="368" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="20" fill="#475569">Firmographics and old account lists</text>
+      <circle cx="106" cy="412" r="5" fill="#94A3B8"/>
+      <text x="124" y="418" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="20" fill="#475569">Generic intent labels without evidence</text>
+      <circle cx="106" cy="462" r="5" fill="#94A3B8"/>
+      <text x="124" y="468" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="20" fill="#475569">Timing often visible after demand peaks</text>
+    </g>
+  </g>
+  <g id="contrast-hiring">
+    <rect x="708" y="218" width="500" height="286" rx="14" fill="#FFFFFF" stroke="#10B981" stroke-width="2"/>
+    <rect x="708" y="218" width="500" height="54" rx="14" fill="#10B981"/>
+    <text x="732" y="253" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="18" font-weight="800" fill="#FFFFFF">Fresh hiring behavior</text>
+    <text x="732" y="314" font-family='Georgia, Microsoft YaHei, serif' font-size="30" font-weight="700" fill="#0F172A">Why now</text>
+    <g id="hiring-items">
+      <circle cx="742" cy="362" r="5" fill="#10B981"/>
+      <text x="760" y="368" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="20" fill="#0F172A">Public evidence of active company change</text>
+      <circle cx="742" cy="412" r="5" fill="#10B981"/>
+      <text x="760" y="418" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="20" fill="#0F172A">Roles imply budget, bottlenecks, and projects</text>
+      <circle cx="742" cy="462" r="5" fill="#10B981"/>
+      <text x="760" y="468" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="20" fill="#0F172A">Outreach can reference actual evidence</text>
+    </g>
+  </g>
+  <g id="center-divider">
+    <line x1="640" y1="222" x2="640" y2="504" stroke="#E2E8F0" stroke-width="2" stroke-dasharray="8,8"/>
+    <circle cx="640" cy="360" r="38" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+    <text x="640" y="368" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="18" font-weight="800" fill="#475569">VS</text>
+  </g>
+  <g id="takeaway">
+    <rect x="150" y="558" width="980" height="70" rx="14" fill="#0F172A"/>
+    <text x="640" y="588" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="17" font-weight="700" fill="#FFFFFF">Buying intent is not just a list problem; it is a timing and evidence problem.</text>
+    <text x="640" y="615" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="15" fill="#E2E8F0">SignalScout uses hiring activity as the public trail that makes timing defensible.</text>
+  </g>
+  <g id="footer">
+    <text x="56" y="674" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="12" font-weight="700" fill="#94A3B8">Timing and evidence beat static lead lists</text>
+    <text x="1224" y="674" text-anchor="end" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="12" font-weight="700" fill="#94A3B8">02 / 08</text>
+  </g>
+</svg>

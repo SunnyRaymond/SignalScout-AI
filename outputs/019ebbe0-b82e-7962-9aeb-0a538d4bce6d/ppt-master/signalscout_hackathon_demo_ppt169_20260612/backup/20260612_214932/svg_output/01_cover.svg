@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="coverWash" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F8FAFC"/>
+      <stop offset="55%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#E2E8F0"/>
+    </linearGradient>
+    <clipPath id="dashboardClip">
+      <rect x="704" y="150" width="520" height="361" rx="18"/>
+    </clipPath>
+  </defs>
+  <rect x="0" y="0" width="1280" height="720" fill="url(#coverWash)"/>
+  <g id="bg-decoration">
+    <circle cx="1130" cy="110" r="170" fill="#38BDF8" fill-opacity="0.10"/>
+    <circle cx="1040" cy="610" r="210" fill="#10B981" fill-opacity="0.08"/>
+    <rect x="60" y="596" width="448" height="2" fill="#10B981"/>
+  </g>
+  <g id="logo-area">
+    <circle cx="89" cy="87" r="29" fill="#0F172A"/>
+    <path d="M72 93 C82 72 101 72 108 93" fill="none" stroke="#10B981" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="91" cy="88" r="6" fill="#38BDF8"/>
+    <text x="134" y="92" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="18" font-weight="700" fill="#0F172A">SignalScout AI</text>
+    <rect x="282" y="72" width="176" height="30" rx="15" fill="#38BDF8" fill-opacity="0.12" stroke="#38BDF8" stroke-width="1"/>
+    <text x="370" y="92" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="13" font-weight="700" fill="#0F172A">Marketable product</text>
+  </g>
+  <g id="title-block">
+    <text x="60" y="236" font-family='Georgia, Microsoft YaHei, serif' font-size="72" font-weight="700" fill="#0F172A">
+      <tspan x="60" dy="0">Turn job postings</tspan>
+      <tspan x="60" dy="82">into B2B buying</tspan>
+      <tspan x="60" dy="82">signals.</tspan>
+    </text>
+    <text x="64" y="502" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="24" fill="#475569">
+      <tspan x="64" dy="0">SignalScout connects public hiring behavior</tspan>
+      <tspan x="64" dy="34">to ranked leads, evidence, outreach, and team handoff.</tspan>
+    </text>
+  </g>
+  <g id="hero-image">
+    <rect x="696" y="142" width="536" height="377" rx="24" fill="#0F172A" fill-opacity="0.08"/>
+    <rect x="704" y="150" width="520" height="361" rx="18" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+    <image href="../images/dashboard-live.png" x="704" y="150" width="520" height="361" preserveAspectRatio="xMidYMid meet" clip-path="url(#dashboardClip)"/>
+    <rect x="704" y="150" width="520" height="361" rx="18" fill="none" stroke="#10B981" stroke-width="2"/>
+    <rect x="736" y="538" width="456" height="44" rx="22" fill="#0F172A"/>
+    <text x="964" y="566" text-anchor="middle" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="15" font-weight="700" fill="#FFFFFF">Live product is the proof object</text>
+  </g>
+  <g id="footer">
+    <text x="60" y="666" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="12" font-weight="700" fill="#94A3B8">Hackathon demo setup</text>
+    <text x="1220" y="666" text-anchor="end" font-family='Arial, Microsoft YaHei, PingFang SC, sans-serif' font-size="12" font-weight="700" fill="#94A3B8">01 / 08</text>
+  </g>
+</svg>
